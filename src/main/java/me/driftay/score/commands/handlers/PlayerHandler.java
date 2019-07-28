@@ -4,14 +4,18 @@ import me.driftay.score.SaberCore;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class PlayerHandler implements Listener {
 
@@ -44,6 +48,37 @@ public class PlayerHandler implements Listener {
                 }
 
             }, 1);
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onInventoryClick(InventoryClickEvent event) {
+        Inventory inventory = event.getView().getTopInventory();
+
+        if(inventory != null && inventory.getType() == InventoryType.BREWING) {
+            if(event.getClick() == ClickType.NUMBER_KEY && (event.getRawSlot() == 0 || event.getRawSlot() == 1 || event.getRawSlot() == 2)) {
+                event.setCancelled(true);
+                return;
+            }
+
+            if(event.getClick().name().contains("SHIFT") && event.getCurrentItem().getAmount() > 1) {
+                Player player = (Player) event.getWhoClicked();
+                ItemStack stack = event.getCurrentItem();
+                ItemStack newStack = new ItemStack(stack);
+
+                newStack.setAmount(stack.getAmount() - 1);
+                stack.setAmount(1);
+
+                Bukkit.getScheduler().runTask(SaberCore.getInstance(), () -> {
+                    if(player.getInventory().getItem(event.getSlot()) == null) {
+                        player.getInventory().setItem(event.getSlot(), newStack);
+                    } else {
+                        stack.setAmount(newStack.getAmount() + 1);
+                    }
+
+                    player.updateInventory();
+                });
+            }
         }
     }
 }

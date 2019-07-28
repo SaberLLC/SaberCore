@@ -20,4 +20,11 @@ public class JsonComponentText {
         message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(tooltip).create()));
         p.spigot().sendMessage(message);
     }
+
+    public static void sendUrlMessage(Player p, String msg, String tooltip, String url) {
+        TextComponent message = new TextComponent(msg);
+        message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url));
+        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(tooltip).create()));
+        p.spigot().sendMessage(message);
+    }
 }

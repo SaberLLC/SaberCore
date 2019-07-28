@@ -2,6 +2,7 @@ package me.driftay.score.commands;
 
 import me.driftay.score.SaberCore;
 import me.driftay.score.utils.CooldownManager;
+import me.driftay.score.utils.JsonComponentText;
 import me.driftay.score.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -14,7 +15,6 @@ public class CmdLFF implements CommandExecutor {
 
     private CooldownManager cooldownManager = new CooldownManager();
 
-
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
@@ -23,7 +23,7 @@ public class CmdLFF implements CommandExecutor {
             if (timeLeft == 0) {
                 if (sender.hasPermission("sabercore.lff")) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        player.sendMessage(Message.LFF_MESSAGE.getMessage().replace("%player%", sender.getName()));
+                        JsonComponentText.sendCommandMsg(player, Message.LFF_MESSAGE.getMessage().replace("%player%", sender.getName()), "Click to invite!", "f invite " + sender.getName());
                     }
                     if (!sender.hasPermission("sabercore.lff.bypass")) {
                         cooldownManager.setCooldown(p.getUniqueId(), CooldownManager.DEFAULT_COOLDOWN);

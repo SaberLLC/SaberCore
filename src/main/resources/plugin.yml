@@ -1,0 +1,15 @@
+name: SaberCore
+version: ${project.version}
+main: me.driftay.score.SaberCore
+author: Driftay
+commands:
+  nv:
+    description: base command nightvision
+  jellylegs:
+    description: base command for jellylegs
+  lff:
+    description: base command for people lff
+  anvil:
+    description: base command for opening anvil
+  recycle:
+    description: base command for recycling bottles

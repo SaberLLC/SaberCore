@@ -1,16 +1,21 @@
 package me.driftay.score.commands.handlers;
 
 import me.driftay.score.SaberCore;
+import me.driftay.score.utils.Message;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -34,7 +39,7 @@ public class PlayerHandler implements Listener {
     }
 
     @EventHandler
-    public void OnDrinkPotion(PlayerItemConsumeEvent event) {
+    public void onDrinkPotion(PlayerItemConsumeEvent event) {
         if (event.getItem() == null
                 || event.getItem().getType() != Material.POTION) return;
 
@@ -78,6 +83,40 @@ public class PlayerHandler implements Listener {
 
                     player.updateInventory();
                 });
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        PlayerData playerData = PlayerData.getByName(player.getName());
+        playerData.cancelPearl(player);
+    }
+
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        PlayerData playerData = PlayerData.getByName(player.getName());
+
+        if(player.getGameMode().equals(GameMode.CREATIVE)) {
+            return;
+        }
+
+        if(!event.hasItem()) {
+            return;
+        }
+
+        if(event.getAction().name().startsWith("RIGHT_")) {
+            ItemStack stack = event.getItem();
+
+            if (stack.getType() == Material.ENDER_PEARL) {
+                if (playerData.isPearlActive(player)) {
+                    event.setUseItemInHand(Event.Result.DENY);
+                    player.sendMessage(Message.ENDERPEARL_ON_COOLDOWN.getMessage().replace("%time%", PlayerData.getRemaining(playerData.getPearlMillisecondsLeft(player), true, false)));
+                } else {
+                    playerData.applyPearlCooldown(player);
+                }
             }
         }
     }

@@ -3,9 +3,15 @@ version: ${project.version}
 main: me.driftay.score.SaberCore
 author: Driftay
 commands:
+  ct:
+    aliases:
+      - combattag
+    description: base command for combat tag
   nv:
     description: base command nightvision
   jellylegs:
+    aliases:
+      - jl
     description: base command for jellylegs
   lff:
     description: base command for people lff
@@ -13,3 +19,16 @@ commands:
     description: base command for opening anvil
   recycle:
     description: base command for recycling bottles
+permissions:
+  sabercore.anvil:
+    description: Allows access to /anvil
+  sabercore.jellylegs:
+    description: Allows access to /jellylegs
+  sabercore.lff:
+    description: Allows access to /lff
+  sabercore.lff.bypass:
+    description: Bypasses cooldown for /lff command
+  sabercore.nightvision:
+    description: Allows access to /nv
+  sabercore.recycle:
+    description: Allows access to /recycle

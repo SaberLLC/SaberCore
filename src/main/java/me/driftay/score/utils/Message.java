@@ -8,6 +8,13 @@ public enum Message {
     NOT_PLAYER("must-be-player", "&c&l[!] &7You must be a player to use this command!"),
     PLAYER_NOT_FOUND("player-not-found", "&c&l[!] &b%player% &7is not online!"),
 
+    COMMAND_COMBAT_TAG_NONE("combat-tag.none", "&c&l[!] &7You currently have no combat tag :)"),
+    COMMAND_COMBAT_TAG_TIME("combat-tag.time", "&c&l[!] &7You are currently combat tagged for &b%time%&7!"),
+    SPAWN_TAG_NO_COMMAND("spawn-tag.no-command", "&c&l[!] &7You cannot use this command while combat tagged"),
+    SPAWN_TAG_TAGGER("spawn-tag.tagger-message", "&c&l[!] &7You have combat tagged %player%"),
+    SPAWN_TAG_OTHER("spawn-tag.other-message", "&c&l[!] &7You have been combat tagged by %player%"),
+
+    ENDERPEARL_ON_COOLDOWN("enderpearl-on-cooldown", "&c&l[!] &7You cannot use another enderpearl for &b%time%&7!"),
     ANVIL_OPENED("anvil-open", "&c&l[!] &7Opening anvil..."),
 
     LFF_MESSAGE("lff.message", "&c&lLFF &7- &b%player% &7is looking for a faction! &f(Hover)"),

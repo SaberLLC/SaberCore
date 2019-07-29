@@ -1,7 +1,9 @@
 package me.driftay.score;
 
 import me.driftay.score.commands.*;
+import me.driftay.score.commands.handlers.PlayerData;
 import me.driftay.score.commands.handlers.PlayerHandler;
+import me.driftay.score.commands.handlers.SpawnTagHandler;
 import me.driftay.score.config.Config;
 import me.driftay.score.config.Persist;
 import me.driftay.score.file.CustomFile;
@@ -18,6 +20,7 @@ public final class SaberCore extends JavaPlugin {
     public static SaberCore instance;
     private static Logger logger;
     private Persist persist;
+    private static PlayerData playerData;
 
     public void onEnable(){
         instance = this;
@@ -26,6 +29,7 @@ public final class SaberCore extends JavaPlugin {
         persist = new Persist();
         getDataFolder().mkdirs();
         Config.load();
+        SpawnTagHandler.hook();
         Collections.singletonList(new MessageFile()).forEach(CustomFile::init);
         registerCommands();
     }
@@ -49,8 +53,13 @@ public final class SaberCore extends JavaPlugin {
         getCommand("anvil").setExecutor(new CmdAnvil());
         getCommand("nv").setExecutor(new CmdNightVision());
         getCommand("recycle").setExecutor(new CmdRecycle());
+        getCommand("ct").setExecutor(new CmdCombatTag());
     }
 
+
+    public PlayerData getPlayerManager(){
+        return playerData;
+    }
 
     public static void log(String message) { logger.log(Level.INFO, message); }
 

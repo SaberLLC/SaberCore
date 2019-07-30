@@ -1,7 +1,6 @@
 package me.driftay.score.commands.handlers;
 
 import me.driftay.score.config.Config;
-import me.driftay.score.utils.Message;
 import org.apache.commons.lang.time.DurationFormatUtils;
 import org.bukkit.entity.Player;
 
@@ -16,7 +15,6 @@ public class PlayerData {
 
     public static Map<String, PlayerData> playerDataMap = new HashMap<>();
     private Map<UUID, Long> pearlCooldown = new HashMap<>();
-    public static Map<UUID, Long> tagged = new HashMap<>();
     private String name;
 
     public PlayerData(String name){
@@ -25,40 +23,6 @@ public class PlayerData {
         playerDataMap.put(name, this);
     }
 
-    public boolean isSpawnTagActive(Player player) {
-        return tagged.containsKey(player.getUniqueId()) && System.currentTimeMillis() < tagged.get(player.getUniqueId());
-    }
-
-    public void applyTagger(Player tagger, Player other) {
-        if(!tagged.containsKey(tagger.getUniqueId())) {
-            tagger.sendMessage(Message.SPAWN_TAG_TAGGER.getMessage().replace("%player%", other.getName()));
-        }
-        this.disableFly(tagger);
-        tagged.put(tagger.getUniqueId(), System.currentTimeMillis() + (Config.combatTagTimer * 1000));
-    }
-
-    public void applyOther(Player tagger, Player other) {
-        if(!tagged.containsKey(other.getUniqueId())) {
-            other.sendMessage(Message.SPAWN_TAG_OTHER.getMessage().replace("%player%", tagger.getName()));
-        }
-        this.disableFly(other);
-        tagged.put(other.getUniqueId(), System.currentTimeMillis() + (Config.combatTagTimer * 1000));
-    }
-
-    public long getSpawnTagMillisecondsLeft(Player player) {
-        if(tagged.containsKey(player.getUniqueId())) {
-            return Math.max(tagged.get(player.getUniqueId()) - System.currentTimeMillis(), 0L);
-        }
-        return 0L;
-    }
-
-
-
-    private void disableFly(Player player) {
-        if(player.isFlying()) {
-            player.setFlying(false);
-        }
-    }
 
     public boolean isPearlActive(Player player) {
         return pearlCooldown.containsKey(player.getUniqueId()) && System.currentTimeMillis() < pearlCooldown.get(player.getUniqueId());

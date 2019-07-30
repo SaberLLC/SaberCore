@@ -1,6 +1,7 @@
-package me.driftay.score.commands.handlers;
+package me.driftay.score.listeners;
 
 import me.driftay.score.SaberCore;
+import me.driftay.score.commands.handlers.PlayerData;
 import me.driftay.score.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;

@@ -3,10 +3,8 @@ version: ${project.version}
 main: me.driftay.score.SaberCore
 author: Driftay
 commands:
-  ct:
-    aliases:
-      - combattag
-    description: base command for combat tag
+  sabercore:
+    description: base command for core
   nv:
     description: base command nightvision
   jellylegs:

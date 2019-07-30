@@ -1,6 +1,6 @@
 package me.driftay.score.commands;
 
-import me.driftay.score.commands.handlers.PlayerHandler;
+import me.driftay.score.listeners.PlayerHandler;
 import me.driftay.score.utils.Message;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -17,7 +17,7 @@ public class CmdAnvil implements CommandExecutor {
             return false;
         }
 
-        if(!sender.hasPermission("sabercore.anvil")){
+        if (!sender.hasPermission("sabercore.anvil")) {
             sender.sendMessage(Message.NO_PERMISSION.getMessage());
             return false;
         }

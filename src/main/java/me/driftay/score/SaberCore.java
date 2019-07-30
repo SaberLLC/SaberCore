@@ -21,7 +21,19 @@ public final class SaberCore extends JavaPlugin {
     private static Logger logger;
     private Persist persist;
 
-    public void onEnable(){
+    public static void log(String message) {
+        logger.log(Level.INFO, message);
+    }
+
+    public static void log(Level level, String message) {
+        logger.log(level, message);
+    }
+
+    public static SaberCore getInstance() {
+        return instance;
+    }
+
+    public void onEnable() {
         instance = this;
         logger = this.getLogger();
         registerListeners();
@@ -37,7 +49,6 @@ public final class SaberCore extends JavaPlugin {
     public void onDisable() {
         Config.save();
     }
-
 
     private void registerListeners() {
         Util.getClassesInPackage(this, "me.driftay.score.listeners").stream().filter(Listener.class::isAssignableFrom).forEach(clazz -> {
@@ -56,37 +67,34 @@ public final class SaberCore extends JavaPlugin {
         getCommand("nv").setExecutor(new CmdNightVision());
         getCommand("recycle").setExecutor(new CmdRecycle());
         getCommand("sabercore").setExecutor(new CmdReload());
+        getCommand("ping").setExecutor(new CmdPing());
     }
 
-    private void registerBooleans(){
-        if(Config.useAntiCobbleMonster){
+    private void registerBooleans() {
+        if (Config.useAntiCobbleMonster) {
             getServer().getPluginManager().registerEvents(new AntiCobbleMonster(), this);
-            Bukkit.broadcastMessage("AntiCobble");
         }
-        if(Config.useAntiWildernessSpawner){
+        if (Config.useAntiWildernessSpawner) {
             getServer().getPluginManager().registerEvents(new AntiWildernessSpawner(), this);
-            Bukkit.broadcastMessage("AntiWildSpawner");
         }
-        if(Config.useDisabledCommands){
+        if (Config.useDisabledCommands) {
             getServer().getPluginManager().registerEvents(new DisabledCommands(), this);
-            Bukkit.broadcastMessage("DisabledCommands");
         }
-        if(Config.useAntiBoatPlacement){
+        if (Config.useAntiBoatPlacement) {
             getServer().getPluginManager().registerEvents(new BoatListener(), this);
-            Bukkit.broadcastMessage("AntiBoatPlace");
         }
-        if(Config.useSpawnerSponge){
+        if (Config.useSpawnerSponge) {
             getServer().getPluginManager().registerEvents(new SpawnerSponge(), this);
-            Bukkit.broadcastMessage("SpawnerSponge");
         }
-
+        if (Config.useRegionListener) {
+            getServer().getPluginManager().registerEvents(new RegionListener(), this);
+        }
+        if (Config.useBookDisenchant) {
+            getServer().getPluginManager().registerEvents(new BookDisenchant(), this);
+        }
     }
 
-    public static void log(String message) { logger.log(Level.INFO, message); }
-
-    public static void log(Level level, String message) { logger.log(level, message); }
-
-    public static SaberCore getInstance(){ return instance; }
-
-    public Persist getPersist() { return persist; }
+    public Persist getPersist() {
+        return persist;
+    }
 }

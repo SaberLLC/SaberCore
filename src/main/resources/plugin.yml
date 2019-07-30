@@ -5,6 +5,8 @@ author: Driftay
 commands:
   sabercore:
     description: base command for core
+  ping:
+    description: base command for ping
   nv:
     description: base command nightvision
   jellylegs:

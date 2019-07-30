@@ -84,6 +84,7 @@ public class SpawnerSponge implements Listener {
             }
         }
     }
+
     private boolean isSpawner(Material material) {
         return material.equals(Material.MOB_SPAWNER);
     }

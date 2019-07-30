@@ -21,7 +21,8 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PlayerHandler implements Listener {
 
@@ -61,13 +62,13 @@ public class PlayerHandler implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         Inventory inventory = event.getView().getTopInventory();
 
-        if(inventory != null && inventory.getType() == InventoryType.BREWING) {
-            if(event.getClick() == ClickType.NUMBER_KEY && (event.getRawSlot() == 0 || event.getRawSlot() == 1 || event.getRawSlot() == 2)) {
+        if (inventory != null && inventory.getType() == InventoryType.BREWING) {
+            if (event.getClick() == ClickType.NUMBER_KEY && (event.getRawSlot() == 0 || event.getRawSlot() == 1 || event.getRawSlot() == 2)) {
                 event.setCancelled(true);
                 return;
             }
 
-            if(event.getClick().name().contains("SHIFT") && event.getCurrentItem().getAmount() > 1) {
+            if (event.getClick().name().contains("SHIFT") && event.getCurrentItem().getAmount() > 1) {
                 Player player = (Player) event.getWhoClicked();
                 ItemStack stack = event.getCurrentItem();
                 ItemStack newStack = new ItemStack(stack);
@@ -76,7 +77,7 @@ public class PlayerHandler implements Listener {
                 stack.setAmount(1);
 
                 Bukkit.getScheduler().runTask(SaberCore.getInstance(), () -> {
-                    if(player.getInventory().getItem(event.getSlot()) == null) {
+                    if (player.getInventory().getItem(event.getSlot()) == null) {
                         player.getInventory().setItem(event.getSlot(), newStack);
                     } else {
                         stack.setAmount(newStack.getAmount() + 1);
@@ -100,15 +101,15 @@ public class PlayerHandler implements Listener {
         Player player = event.getPlayer();
         PlayerData playerData = PlayerData.getByName(player.getName());
 
-        if(player.getGameMode().equals(GameMode.CREATIVE)) {
+        if (player.getGameMode().equals(GameMode.CREATIVE)) {
             return;
         }
 
-        if(!event.hasItem()) {
+        if (!event.hasItem()) {
             return;
         }
 
-        if(event.getAction().name().startsWith("RIGHT_")) {
+        if (event.getAction().name().startsWith("RIGHT_")) {
             ItemStack stack = event.getItem();
 
             if (stack.getType() == Material.ENDER_PEARL) {

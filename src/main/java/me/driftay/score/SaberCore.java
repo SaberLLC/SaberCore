@@ -92,8 +92,10 @@ public final class SaberCore extends JavaPlugin {
         if (Config.useBookDisenchant) {
             getServer().getPluginManager().registerEvents(new BookDisenchant(), this);
         }
+        if(Config.useAntiSpawnerMine){
+            getServer().getPluginManager().registerEvents(new SpawnerMine(), this);
+        }
     }
-
     public Persist getPersist() {
         return persist;
     }

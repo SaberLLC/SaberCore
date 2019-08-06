@@ -25,9 +25,12 @@ public final class SaberCore extends JavaPlugin {
         logger.log(Level.INFO, message);
     }
 
+
+
     public static void log(Level level, String message) {
         logger.log(level, message);
     }
+
 
     public static SaberCore getInstance() {
         return instance;
@@ -94,6 +97,9 @@ public final class SaberCore extends JavaPlugin {
         }
         if(Config.useAntiSpawnerMine){
             getServer().getPluginManager().registerEvents(new SpawnerMine(), this);
+        }
+        if(Config.useStatTrackSword){
+            getServer().getPluginManager().registerEvents(new StatTrackSwords(), this);
         }
     }
     public Persist getPersist() {

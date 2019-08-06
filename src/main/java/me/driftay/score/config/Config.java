@@ -18,10 +18,14 @@ public class Config {
     public static boolean useDisabledCommands = true;
     public static boolean useBookDisenchant = true;
     public static boolean useAntiSpawnerMine = true;
+    public static boolean useStatTrackSword = true;
     public static double spawnerMineRadius = 200.0;
+
 
     public static List<String> disabledCommands = new ArrayList<>();
     public static List<String> blockedRegions = new ArrayList<>();
+    public static List<String> statTrackSwordsLore = new ArrayList<>();
+
     private static transient Config i = new Config();
 
     static {
@@ -34,6 +38,8 @@ public class Config {
 
         blockedRegions.add("spawn");
         blockedRegions.add("someworldeditregionname");
+
+        statTrackSwordsLore.add("&e{killer} &4killed &e{player}");
     }
 
 

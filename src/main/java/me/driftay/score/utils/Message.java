@@ -10,7 +10,7 @@ public enum Message {
 
     DISABLED_COMMAND_MESSAGE("disabled-commands-message", "&c&l[!] &4You are not permitted to use &c&l&n%command%"),
 
-    PING_YOURSELF("ping-yourself", "&c&l[!] &7Your ping is &b%pingms&7."),
+    PING_YOURSELF("ping-yourself", "&c&l[!] &7Your ping is &b%ping%ms&7."),
     PING_OTHER("ping-other", "&c&l[!] &b%player%'s &7ping is &b%ping%&7."),
 
     ANTI_SPAWNER_MINE_PLAYERS_NEAR("anti-spawner-mine-players-near", "&c&l[!] &7You may not break spawners while enemies are near!"),

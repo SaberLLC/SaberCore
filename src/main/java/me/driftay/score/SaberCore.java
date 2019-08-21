@@ -71,6 +71,7 @@ public final class SaberCore extends JavaPlugin {
         getCommand("recycle").setExecutor(new CmdRecycle());
         getCommand("sabercore").setExecutor(new CmdReload());
         getCommand("ping").setExecutor(new CmdPing());
+        getCommand("setslots").setExecutor(new CmdSetSlots(this));
     }
 
     private void registerBooleans() {

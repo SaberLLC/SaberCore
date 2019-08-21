@@ -9,6 +9,8 @@ commands:
     description: base command for ping
   nv:
     description: base command nightvision
+  setslots:
+    description: base command to set the number of slots in the server.properties
   jellylegs:
     aliases:
       - jl

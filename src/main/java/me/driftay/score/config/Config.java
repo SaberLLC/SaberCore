@@ -39,7 +39,7 @@ public class Config {
         blockedRegions.add("spawn");
         blockedRegions.add("someworldeditregionname");
 
-        statTrackSwordsLore.add("&e{killer} &4killed &e{player}");
+        statTrackSwordsLore.add("&6{date} &e{player} &fwas killed by &e{killer}");
     }
 
 

@@ -75,6 +75,9 @@ public final class SaberCore extends JavaPlugin {
     }
 
     private void registerBooleans() {
+        if(Config.useAntiDestroySystem){
+            getServer().getPluginManager().registerEvents(new AntiDestroy(), this);
+        }
         if(Config.useAutoRespawn){
             getServer().getPluginManager().registerEvents(new AutoRespawn(), this);
         }

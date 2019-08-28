@@ -10,6 +10,7 @@ public class Config {
     public static int lffCooldownSeconds = 30;
     public static int enderPearlCooldown = 15;
     public static boolean useAntiCobbleMonster = true;
+    public static boolean useAutoRespawn = true;
     public static boolean useAntiWildernessSpawner = true;
     public static boolean useAntiBoatPlacement = true;
     public static boolean useSpawnerSponge = true;

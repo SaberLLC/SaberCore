@@ -75,6 +75,9 @@ public final class SaberCore extends JavaPlugin {
     }
 
     private void registerBooleans() {
+        if(Config.useAutoRespawn){
+            getServer().getPluginManager().registerEvents(new AutoRespawn(), this);
+        }
         if (Config.useAntiCobbleMonster) {
             getServer().getPluginManager().registerEvents(new AntiCobbleMonster(), this);
         }

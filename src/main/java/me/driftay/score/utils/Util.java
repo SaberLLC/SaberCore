@@ -2,10 +2,14 @@ package me.driftay.score.utils;
 
 import com.google.common.collect.ImmutableSet;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import me.driftay.score.SaberCore;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -20,6 +24,9 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class Util {
+    public static Economy economy;
+
+    public static FileConfiguration config = SaberCore.instance.getConfig();
 
     public static String color(String string) {
         return ChatColor.translateAlternateColorCodes('&', string);
@@ -85,6 +92,22 @@ public class Util {
             return null;
         }
         return (WorldGuardPlugin) plugin;
+    }
+
+    public static void register() {
+        RegisteredServiceProvider<Economy> service = Bukkit.getServicesManager().getRegistration(Economy.class);
+
+        if (service != null) {
+            economy = service.getProvider();
+        }
+    }
+
+    public static void sell(Player player, double price) {
+        economy.depositPlayer(player, price);
+    }
+
+    public static boolean isHooked() {
+        return economy != null;
     }
 
     public static int getPing(Player p) {

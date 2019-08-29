@@ -1,17 +1,25 @@
 package me.driftay.score;
 
 import me.driftay.score.commands.*;
-import me.driftay.score.config.Config;
+import me.driftay.score.commands.handlers.ChunkbusterListener;
+import me.driftay.score.commands.handlers.HarvesterHoeListener;
+import me.driftay.score.config.Conf;
 import me.driftay.score.config.Persist;
 import me.driftay.score.exempt.*;
 import me.driftay.score.file.CustomFile;
 import me.driftay.score.file.impl.MessageFile;
+import me.driftay.score.hooks.HookManager;
+import me.driftay.score.hooks.PluginHook;
+import me.driftay.score.hooks.impl.FactionHook;
+import me.driftay.score.hooks.impl.WorldGuardHook;
 import me.driftay.score.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,14 +51,20 @@ public final class SaberCore extends JavaPlugin {
         registerBooleans();
         persist = new Persist();
         getDataFolder().mkdirs();
-        Config.load();
+        Conf.load();
         Collections.singletonList(new MessageFile()).forEach(CustomFile::init);
         registerCommands();
-
+        Util.register();
+        List<PluginHook<?>> hooks = new ArrayList<>();
+        hooks.add(new FactionHook());
+        if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
+            hooks.add(new WorldGuardHook());
+        }
+        new HookManager(hooks);
     }
 
     public void onDisable() {
-        Config.save();
+        Conf.save();
     }
 
     private void registerListeners() {
@@ -75,40 +89,48 @@ public final class SaberCore extends JavaPlugin {
     }
 
     private void registerBooleans() {
-        if(Config.cancelDragonEggTeleport){
+        if(Conf.useHarvesterHoes){
+            getServer().getPluginManager().registerEvents(new HarvesterHoeListener(), this);
+            getCommand("harvesterhoe").setExecutor(new CmdHarvesterHoe());
+        }
+        if(Conf.useChunkBusters){
+            getServer().getPluginManager().registerEvents(new ChunkbusterListener(), this);
+            getCommand("chunkbuster").setExecutor(new CmdChunkbuster());
+        }
+        if(Conf.cancelDragonEggTeleport){
             getServer().getPluginManager().registerEvents(new DragonEggAntiTP(), this);
         }
-        if(Config.useAntiDestroySystem){
+        if(Conf.useAntiDestroySystem){
             getServer().getPluginManager().registerEvents(new AntiDestroy(), this);
         }
-        if(Config.useAutoRespawn){
+        if(Conf.useAutoRespawn){
             getServer().getPluginManager().registerEvents(new AutoRespawn(), this);
         }
-        if (Config.useAntiCobbleMonster) {
+        if (Conf.useAntiCobbleMonster) {
             getServer().getPluginManager().registerEvents(new AntiCobbleMonster(), this);
         }
-        if (Config.useAntiWildernessSpawner) {
+        if (Conf.useAntiWildernessSpawner) {
             getServer().getPluginManager().registerEvents(new AntiWildernessSpawner(), this);
         }
-        if (Config.useDisabledCommands) {
+        if (Conf.useDisabledCommands) {
             getServer().getPluginManager().registerEvents(new DisabledCommands(), this);
         }
-        if (Config.useAntiBoatPlacement) {
+        if (Conf.useAntiBoatPlacement) {
             getServer().getPluginManager().registerEvents(new BoatListener(), this);
         }
-        if (Config.useSpawnerSponge) {
+        if (Conf.useSpawnerSponge) {
             getServer().getPluginManager().registerEvents(new SpawnerSponge(), this);
         }
-        if (Config.useRegionListener) {
+        if (Conf.useRegionListener) {
             getServer().getPluginManager().registerEvents(new RegionListener(), this);
         }
-        if (Config.useBookDisenchant) {
+        if (Conf.useBookDisenchant) {
             getServer().getPluginManager().registerEvents(new BookDisenchant(), this);
         }
-        if(Config.useAntiSpawnerMine){
+        if(Conf.useAntiSpawnerMine){
             getServer().getPluginManager().registerEvents(new SpawnerMine(), this);
         }
-        if(Config.useStatTrackSword){
+        if(Conf.useStatTrackSword){
             getServer().getPluginManager().registerEvents(new StatTrackSwords(), this);
         }
     }

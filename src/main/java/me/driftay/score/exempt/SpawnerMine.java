@@ -2,7 +2,7 @@ package me.driftay.score.exempt;
 
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
-import me.driftay.score.config.Config;
+import me.driftay.score.config.Conf;
 import me.driftay.score.utils.Message;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -19,7 +19,7 @@ public class SpawnerMine implements Listener {
     public void onSpawnerMine(BlockBreakEvent e) {
         if(!e.getBlock().getType().equals(Material.MOB_SPAWNER)) return;
 
-        if (nearbyEnemies(e.getPlayer(), Config.spawnerMineRadius, null) && !e.getPlayer().hasPermission("sabercore.spawnermine,bypass")) {
+        if (nearbyEnemies(e.getPlayer(), Conf.spawnerMineRadius, null) && !e.getPlayer().hasPermission("sabercore.spawnermine,bypass")) {
             e.setCancelled(true);
         }
         if(e.isCancelled()){

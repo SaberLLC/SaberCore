@@ -1,6 +1,6 @@
 package me.driftay.score.exempt;
 
-import me.driftay.score.config.Config;
+import me.driftay.score.config.Conf;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -21,7 +21,7 @@ public class AntiDestroy implements Listener {
             return;
         }
         Material type = ((Item) e.getEntity()).getItemStack().getType();
-        if (!Config.lightningDeny.contains(type.name())) {
+        if (!Conf.lightningDeny.contains(type.name())) {
             return;
         }
         e.setCancelled(true);
@@ -39,7 +39,7 @@ public class AntiDestroy implements Listener {
             return;
         }
         Material type = ((Item) e.getEntity()).getItemStack().getType();
-        if (!Config.lavaBurnDeny.contains(type.name())) {
+        if (!Conf.lavaBurnDeny.contains(type.name())) {
             return;
         }
         e.setCancelled(true);
@@ -57,7 +57,7 @@ public class AntiDestroy implements Listener {
             return;
         }
         Material type = ((Item) e.getEntity()).getItemStack().getType();
-        if (!Config.explosionDeny.contains(type.name())) {
+        if (!Conf.explosionDeny.contains(type.name())) {
             return;
         }
         e.setCancelled(true);

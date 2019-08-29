@@ -1,6 +1,6 @@
 package me.driftay.score.utils;
 
-import me.driftay.score.config.Config;
+import me.driftay.score.config.Conf;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class CooldownManager {
 
-    public static int DEFAULT_COOLDOWN = Config.lffCooldownSeconds;
+    public static int DEFAULT_COOLDOWN = Conf.lffCooldownSeconds;
     private Map<UUID, Integer> cooldowns = new HashMap<>();
 
     public void setCooldown(UUID player, int time) {

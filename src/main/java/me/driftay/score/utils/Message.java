@@ -21,6 +21,17 @@ public enum Message {
     LFF_MESSAGE("lff.message", "&c&lLFF &7- &b%player% &7is looking for a faction! &f(Hover)"),
     LFF_COOLDOWN_MESSAGE("lff.cooldown-message", "&c&l[!] &7You cannot use &b/lff &7for another &b%seconds% &7seconds!"),
 
+    //Chunkbusters
+    CHUNKBUSTER_COMMAND_USAGE("chunkbuster.command-usage", "&c&l[!] &7Try /chunkbuster give <player> <amount>."),
+    CHUNKBUSTER_RECEIVED_MESSAGE("chunkbuster.received", "&c&l[!] &7You have received a chunkbuster."),
+    CHUNKBUSTER_ALREADY_BEING_BUSTED("chunkbuster.being-busted", "&c&l[!] &7This chunk is already being busted."),
+    CHUNKBUSTER_USE_MESSAGE("chunkbuster.use-message", "&c&l[!] &7A ChunkBuster has been placed, you have &c10 seconds &7 to leave this chunk!"),
+    CHUNKBUSTER_CANT_PLACE("chunkbuster.cant-place", "&c&l[!] &7You can't place ChunkBusters here!"),
+
+    //HarvesterHoes
+    HARVESTER_COMMAND_USAGE("harvester.command-usage", "&c&l[!] &7Try /harvesterhoe give <player> <amount>."),
+    HARVESTER_RECEIVED_MESSAGE("harvester.received", "&c&l[!] &7You have received a harvester hoe."),
+
     RECYCLE_ON("recycle-on", "&c&l[!] &7You have togged recycling on!"),
     RECYCLE_OFF("recycle-off", "&c&l[!] &7You have togged recycling off!"),
 

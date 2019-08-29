@@ -2,7 +2,7 @@ package me.driftay.score.exempt;
 
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import me.driftay.score.config.Config;
+import me.driftay.score.config.Conf;
 import me.driftay.score.utils.Util;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -20,7 +20,7 @@ public class RegionListener implements Listener {
         int id = block.getTypeId();
         if (id >= 8 && id <= 11) {
             ProtectedRegion region = null;
-            for (String s : Config.blockedRegions) {
+            for (String s : Conf.blockedRegions) {
                 ProtectedRegion temp = Objects.requireNonNull(Util.getWorldGuard()).getRegionManager(block.getWorld()).getRegion(s);
                 if (temp != null) {
                     region = temp;

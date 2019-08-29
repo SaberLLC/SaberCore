@@ -5,48 +5,73 @@ import me.driftay.score.SaberCore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Config {
+public class Conf {
 
     public static int lffCooldownSeconds = 30;
     public static int enderPearlCooldown = 15;
     public static boolean useAntiCobbleMonster = true;
     public static boolean useAutoRespawn = true;
-    public static boolean useAntiDestroySystem = true;
     public static boolean useAntiWildernessSpawner = true;
     public static boolean useAntiBoatPlacement = true;
-    public static boolean useSpawnerSponge = true;
     public static boolean cancelDragonEggTeleport = false;
+    public static boolean useSpawnerSponge = true;
     public static int spawnerSpongeRadius = 2;
-    public static boolean useRegionListener = true;
-    public static boolean useDisabledCommands = true;
     public static boolean useBookDisenchant = true;
     public static boolean useAntiSpawnerMine = true;
-    public static boolean useStatTrackSword = true;
     public static double spawnerMineRadius = 200.0;
 
+    public static boolean useChunkBusters = true;
+    public static String chunkBusterDisplayName = "&cChunkBuster";
+    public static List<String> chunkBusterLore = new ArrayList<>();
+    public static int chunkBusterWarmup = 10;
+    public static String chunkBusterHologramFormat = "&c&l[!] &7ChunkBuster";
+    public static boolean chunkbusterAsyncMode = false;
+    public static boolean chunkBusterHologram = true;
+    static{
+        chunkBusterLore.add("&7A &cpowerful &7piece of &calien tech");
+        chunkBusterLore.add("&7Destroys the chunk it is placed in!");
+    }
 
-    public static List<String> disabledCommands = new ArrayList<>();
-    public static List<String> blockedRegions = new ArrayList<>();
+    public static boolean useHarvesterHoes = true;
+    public static String harvesterHoeDisplayName = "&aHarvester Hoe";
+    public static List<String> harvesterHoeLore = new ArrayList<>();
+    public static boolean harvesterHoeAutoSell = true;
+    public static double perCanePrice = 0.5;
+    static{
+        harvesterHoeLore.add("&7When Mined, Places Sugar Cane Directly,");
+        harvesterHoeLore.add("&7Into Your Inventory!");
+    }
+
+
+    public static boolean useStatTrackSword = true;
     public static List<String> statTrackSwordsLore = new ArrayList<>();
-    public static List<String> lavaBurnDeny = new ArrayList<>();
-    public static List<String> explosionDeny = new ArrayList<>();
-    public static List<String> lightningDeny = new ArrayList<>();
-
-    private static transient Config i = new Config();
-
     static {
+        statTrackSwordsLore.add("&6{date} &e{player} &fwas killed by &e{killer}");
+    }
+
+    public static boolean useDisabledCommands = true;
+    public static List<String> disabledCommands = new ArrayList<>();
+    static{
         disabledCommands.add("/icanhasbukkit");
         disabledCommands.add("/version");
         disabledCommands.add("/ver");
         disabledCommands.add("/plugins");
         disabledCommands.add("/pl");
         disabledCommands.add("/?");
+    }
 
+    public static boolean useRegionListener = true;
+    public static List<String> blockedRegions = new ArrayList<>();
+    static{
         blockedRegions.add("spawn");
         blockedRegions.add("someworldeditregionname");
+    }
 
-        statTrackSwordsLore.add("&6{date} &e{player} &fwas killed by &e{killer}");
-
+    public static boolean useAntiDestroySystem = true;
+    public static List<String> lavaBurnDeny = new ArrayList<>();
+    public static List<String> explosionDeny = new ArrayList<>();
+    public static List<String> lightningDeny = new ArrayList<>();
+    static {
         lavaBurnDeny.add("DIAMOND_HELMET");
         lavaBurnDeny.add("DIAMOND_CHESTPLATE");
         lavaBurnDeny.add("DIAMOND_LEGGINGS");
@@ -76,13 +101,12 @@ public class Config {
         lightningDeny.add("DIAMOND_PICKAXE");
         lightningDeny.add("MOB_SPAWNER");
         lightningDeny.add("HOPPER");
-
-
     }
 
+    private static transient Conf i = new Conf();
 
     public static void load() {
-        SaberCore.getInstance().getPersist().loadOrSaveDefault(i, Config.class, "config");
+        SaberCore.getInstance().getPersist().loadOrSaveDefault(i, Conf.class, "config");
     }
 
     public static void save() {

@@ -1,6 +1,6 @@
 package me.driftay.score.exempt;
 
-import me.driftay.score.config.Config;
+import me.driftay.score.config.Conf;
 import me.driftay.score.utils.Message;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +15,7 @@ public class DisabledCommands implements Listener {
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
         Player p = e.getPlayer();
         String message = e.getMessage();
-        List<String> list = Config.disabledCommands;
+        List<String> list = Conf.disabledCommands;
 
         for (String s : list) {
             if (message.equalsIgnoreCase(s) && !p.hasPermission("sabercore.disabledcommands.bypass")) {

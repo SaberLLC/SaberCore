@@ -5,6 +5,14 @@ author: Driftay
 commands:
   sabercore:
     description: base command for core
+  chunkbuster:
+    aliases:
+      - cb
+    description: base command for chunkbusters
+  harvesterhoe:
+    aliases:
+      - hh
+    description: base command for harvester hoes
   ping:
     description: base command for ping
   nv:

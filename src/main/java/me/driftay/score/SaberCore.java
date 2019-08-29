@@ -75,6 +75,9 @@ public final class SaberCore extends JavaPlugin {
     }
 
     private void registerBooleans() {
+        if(Config.cancelDragonEggTeleport){
+            getServer().getPluginManager().registerEvents(new DragonEggAntiTP(), this);
+        }
         if(Config.useAntiDestroySystem){
             getServer().getPluginManager().registerEvents(new AntiDestroy(), this);
         }

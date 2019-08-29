@@ -15,6 +15,7 @@ public class Config {
     public static boolean useAntiWildernessSpawner = true;
     public static boolean useAntiBoatPlacement = true;
     public static boolean useSpawnerSponge = true;
+    public static boolean cancelDragonEggTeleport = false;
     public static int spawnerSpongeRadius = 2;
     public static boolean useRegionListener = true;
     public static boolean useDisabledCommands = true;

@@ -30,6 +30,16 @@ commands:
   recycle:
     description: base command for recycling bottles
 permissions:
+  sabercore.reload:
+    description: Allows access to reload SaberCore
+  sabercore.disabledcommands.bypass:
+    description: Allows players to execute commands that are in the disabled commands list
+  sabercore.spawnermine.bypass:
+    description: Allows players to bypass the enemy near spawner mine protection
+  sabercore.chunkbusters.give:
+    description: Allows access to give chunkbusters to players
+  sabercore.harvesterhoe.give:
+    description: Allows access to give harvester hoes to players
   sabercore.anvil:
     description: Allows access to /anvil
   sabercore.jellylegs:

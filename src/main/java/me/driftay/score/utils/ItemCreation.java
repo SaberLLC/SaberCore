@@ -28,7 +28,7 @@ public class ItemCreation {
         ItemMeta meta = harvesterItem.getItemMeta();
         meta.setDisplayName(Util.color(Conf.harvesterHoeDisplayName));
         List<String> lore = new ArrayList<>();
-        for (final String s : Conf.harvesterHoeLore) {
+        for (String s : Conf.harvesterHoeLore) {
             lore.add(Util.color(s));
         }
         meta.setLore(lore);
@@ -36,4 +36,5 @@ public class ItemCreation {
         harvesterItem.setItemMeta(meta);
         return harvesterItem;
     }
+
 }

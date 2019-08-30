@@ -89,6 +89,18 @@ public final class SaberCore extends JavaPlugin {
     }
 
     private void registerBooleans() {
+        if(Conf.denyPistonGlitching){
+            getServer().getPluginManager().registerEvents(new PistonGlitching(), this);
+        }
+        if(Conf.denyBlazeWaterDamage){
+            getServer().getPluginManager().registerEvents(new WaterProofBlazes(), this);
+        }
+        if(Conf.denyWeatherChanging){
+            getServer().getPluginManager().registerEvents(new WeatherChange(), this);
+        }
+        if(Conf.denyNaturalMobSpawning){
+            getServer().getPluginManager().registerEvents(new NaturalMobSpawning(), this);
+        }
         if(Conf.useHarvesterHoes){
             getServer().getPluginManager().registerEvents(new HarvesterHoeListener(), this);
             getCommand("harvesterhoe").setExecutor(new CmdHarvesterHoe());

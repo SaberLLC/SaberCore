@@ -13,7 +13,11 @@ public class Conf {
     public static boolean useAutoRespawn = true;
     public static boolean useAntiWildernessSpawner = true;
     public static boolean useAntiBoatPlacement = true;
+    public static boolean denyPistonGlitching = true;
     public static boolean cancelDragonEggTeleport = false;
+    public static boolean denyNaturalMobSpawning = true;
+    public static boolean denyWeatherChanging = true;
+    public static boolean denyBlazeWaterDamage = true;
     public static boolean useSpawnerSponge = true;
     public static int spawnerSpongeRadius = 2;
     public static boolean useBookDisenchant = true;

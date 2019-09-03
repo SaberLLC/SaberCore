@@ -90,6 +90,9 @@ public final class SaberCore extends JavaPlugin {
 
 
     private void registerBooleans() {
+        if(Conf.useOreTracker){
+            getServer().getPluginManager().registerEvents(new OreTracker(), this);
+        }
         if(Conf.instaBreakSponges){
             getServer().getPluginManager().registerEvents(new InstaBreakSponge(), this);
         }

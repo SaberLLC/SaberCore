@@ -23,6 +23,7 @@ public class Conf {
     public static int spawnerSpongeRadius = 2;
     public static boolean useBookDisenchant = true;
     public static boolean useAntiSpawnerMine = true;
+    public static boolean useOreTracker = true;
     public static double spawnerMineRadius = 200.0;
 
     public static boolean useChunkBusters = true;

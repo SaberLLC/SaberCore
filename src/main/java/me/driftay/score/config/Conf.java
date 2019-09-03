@@ -14,6 +14,7 @@ public class Conf {
     public static boolean useAntiWildernessSpawner = true;
     public static boolean useAntiBoatPlacement = true;
     public static boolean denyPistonGlitching = true;
+    public static boolean instaBreakSponges = true;
     public static boolean cancelDragonEggTeleport = false;
     public static boolean denyNaturalMobSpawning = true;
     public static boolean denyWeatherChanging = true;

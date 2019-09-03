@@ -36,5 +36,4 @@ public class ItemCreation {
         harvesterItem.setItemMeta(meta);
         return harvesterItem;
     }
-
 }

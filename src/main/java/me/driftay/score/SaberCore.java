@@ -12,6 +12,7 @@ import me.driftay.score.hooks.HookManager;
 import me.driftay.score.hooks.PluginHook;
 import me.driftay.score.hooks.impl.FactionHook;
 import me.driftay.score.hooks.impl.WorldGuardHook;
+import me.driftay.score.listeners.InstaBreakSponge;
 import me.driftay.score.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -32,7 +33,6 @@ public final class SaberCore extends JavaPlugin {
     public static void log(String message) {
         logger.log(Level.INFO, message);
     }
-
 
 
     public static void log(Level level, String message) {
@@ -88,7 +88,14 @@ public final class SaberCore extends JavaPlugin {
         getCommand("setslots").setExecutor(new CmdSetSlots(this));
     }
 
+
     private void registerBooleans() {
+        if(Conf.useOreTracker){
+            getServer().getPluginManager().registerEvents(new OreTracker(), this);
+        }
+        if(Conf.instaBreakSponges){
+            getServer().getPluginManager().registerEvents(new InstaBreakSponge(), this);
+        }
         if(Conf.denyPistonGlitching){
             getServer().getPluginManager().registerEvents(new PistonGlitching(), this);
         }

@@ -10,8 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
 
-import java.util.Objects;
-
 public class RegionListener implements Listener {
 
     @EventHandler
@@ -21,10 +19,12 @@ public class RegionListener implements Listener {
         if (id >= 8 && id <= 11) {
             ProtectedRegion region = null;
             for (String s : Conf.blockedRegions) {
-                ProtectedRegion temp = Objects.requireNonNull(Util.getWorldGuard()).getRegionManager(block.getWorld()).getRegion(s);
-                if (temp != null) {
-                    region = temp;
-                    break;
+                if(Util.getWorldGuard() != null) {
+                    ProtectedRegion temp = Util.getWorldGuard().getRegionManager(block.getWorld()).getRegion(s);
+                    if (temp != null) {
+                        region = temp;
+                        break;
+                    }
                 }
             }
             if (region != null) {

@@ -6,7 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Conf {
-
+    public static boolean useAntiZombieBaby = true;
+    public static boolean reduceIrongolemHealth = true;
+    public static double irongolemsHealth = 5;
+    public static boolean denyExplosionDamage = true;
+    public static boolean useAntiMobMoving = true;
+    public static boolean useAntiMobTargeting = true;
     public static int lffCooldownSeconds = 30;
     public static int enderPearlCooldown = 15;
     public static boolean useAntiCobbleMonster = true;

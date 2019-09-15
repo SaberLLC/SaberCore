@@ -19,7 +19,6 @@ public class IronGolemHealth implements Listener {
 			return;
 
 		IronGolem ironGolem = (IronGolem) event.getEntity();
-		System.out.println("Set Iron Golem Health to " + Conf.irongolemsHealth);
 		ironGolem.setHealth(Conf.irongolemsHealth);
 	}
 }

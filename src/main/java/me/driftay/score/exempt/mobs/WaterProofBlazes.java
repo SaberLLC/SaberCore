@@ -1,4 +1,4 @@
-package me.driftay.score.exempt;
+package me.driftay.score.exempt.mobs;
 
 import org.bukkit.entity.Blaze;
 import org.bukkit.event.EventHandler;

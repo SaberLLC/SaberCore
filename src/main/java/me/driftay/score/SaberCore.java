@@ -6,6 +6,7 @@ import me.driftay.score.commands.handlers.HarvesterHoeListener;
 import me.driftay.score.config.Conf;
 import me.driftay.score.config.Persist;
 import me.driftay.score.exempt.*;
+import me.driftay.score.exempt.mobs.*;
 import me.driftay.score.file.CustomFile;
 import me.driftay.score.file.impl.MessageFile;
 import me.driftay.score.hooks.HookManager;
@@ -151,6 +152,21 @@ public final class SaberCore extends JavaPlugin {
         }
         if(Conf.useStatTrackSword){
             getServer().getPluginManager().registerEvents(new StatTrackSwords(), this);
+        }
+        if(Conf.useAntiMobTargeting){
+            getServer().getPluginManager().registerEvents(new AntiMobTargeting(), this);
+        }
+        if(Conf.useAntiMobMoving){
+            getServer().getPluginManager().registerEvents(new AntiMobMoving(), this);
+        }
+        if(Conf.denyExplosionDamage){
+            getServer().getPluginManager().registerEvents(new DenyExplosionDamage(), this);
+        }
+        if(Conf.reduceIrongolemHealth){
+            getServer().getPluginManager().registerEvents(new IronGolemHealth(), this);
+        }
+        if(Conf.useAntiZombieBaby){
+            getServer().getPluginManager().registerEvents(new AntiBabyZombie(), this);
         }
     }
     public Persist getPersist() {

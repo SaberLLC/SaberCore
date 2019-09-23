@@ -6,7 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Conf {
-
+    public static boolean useAntiZombieBaby = true;
+    public static boolean reduceIrongolemHealth = true;
+    public static double irongolemsHealth = 5;
+    public static boolean denyExplosionDamage = true;
+    public static boolean useAntiMobMoving = true;
+    public static boolean useAntiMobTargeting = true;
     public static int lffCooldownSeconds = 30;
     public static int enderPearlCooldown = 15;
     public static boolean useAntiCobbleMonster = true;
@@ -14,6 +19,7 @@ public class Conf {
     public static boolean useAntiWildernessSpawner = true;
     public static boolean useAntiBoatPlacement = true;
     public static boolean denyPistonGlitching = true;
+    public static boolean instaBreakSponges = true;
     public static boolean cancelDragonEggTeleport = false;
     public static boolean denyNaturalMobSpawning = true;
     public static boolean denyWeatherChanging = true;
@@ -22,6 +28,7 @@ public class Conf {
     public static int spawnerSpongeRadius = 2;
     public static boolean useBookDisenchant = true;
     public static boolean useAntiSpawnerMine = true;
+    public static boolean useOreTracker = true;
     public static double spawnerMineRadius = 200.0;
 
     public static boolean useSaberPicks = true;

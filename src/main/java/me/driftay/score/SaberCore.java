@@ -6,12 +6,14 @@ import me.driftay.score.commands.handlers.HarvesterHoeListener;
 import me.driftay.score.config.Conf;
 import me.driftay.score.config.Persist;
 import me.driftay.score.exempt.*;
+import me.driftay.score.exempt.mobs.*;
 import me.driftay.score.file.CustomFile;
 import me.driftay.score.file.impl.MessageFile;
 import me.driftay.score.hooks.HookManager;
 import me.driftay.score.hooks.PluginHook;
 import me.driftay.score.hooks.impl.FactionHook;
 import me.driftay.score.hooks.impl.WorldGuardHook;
+import me.driftay.score.listeners.InstaBreakSponge;
 import me.driftay.score.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -32,7 +34,6 @@ public final class SaberCore extends JavaPlugin {
     public static void log(String message) {
         logger.log(Level.INFO, message);
     }
-
 
 
     public static void log(Level level, String message) {
@@ -88,7 +89,14 @@ public final class SaberCore extends JavaPlugin {
         getCommand("setslots").setExecutor(new CmdSetSlots(this));
     }
 
+
     private void registerBooleans() {
+        if(Conf.useOreTracker){
+            getServer().getPluginManager().registerEvents(new OreTracker(), this);
+        }
+        if(Conf.instaBreakSponges){
+            getServer().getPluginManager().registerEvents(new InstaBreakSponge(), this);
+        }
         if(Conf.denyPistonGlitching){
             getServer().getPluginManager().registerEvents(new PistonGlitching(), this);
         }
@@ -144,6 +152,21 @@ public final class SaberCore extends JavaPlugin {
         }
         if(Conf.useStatTrackSword){
             getServer().getPluginManager().registerEvents(new StatTrackSwords(), this);
+        }
+        if(Conf.useAntiMobTargeting){
+            getServer().getPluginManager().registerEvents(new AntiMobTargeting(), this);
+        }
+        if(Conf.useAntiMobMoving){
+            getServer().getPluginManager().registerEvents(new AntiMobMoving(), this);
+        }
+        if(Conf.denyExplosionDamage){
+            getServer().getPluginManager().registerEvents(new DenyExplosionDamage(), this);
+        }
+        if(Conf.reduceIrongolemHealth){
+            getServer().getPluginManager().registerEvents(new IronGolemHealth(), this);
+        }
+        if(Conf.useAntiZombieBaby){
+            getServer().getPluginManager().registerEvents(new AntiBabyZombie(), this);
         }
     }
     public Persist getPersist() {

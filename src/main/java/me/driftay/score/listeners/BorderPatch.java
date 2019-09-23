@@ -1,11 +1,14 @@
 package me.driftay.score.listeners;
 
+import me.driftay.score.commands.handlers.PlayerData;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.WorldBorder;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -16,6 +19,7 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class BorderPatch implements Listener {
 
@@ -145,11 +149,12 @@ public class BorderPatch implements Listener {
     )
     private void onPlayerTeleport(PlayerTeleportEvent evt) {
         PlayerTeleportEvent.TeleportCause cause = evt.getCause();
-        if (!cause.equals(PlayerTeleportEvent.TeleportCause.ENDER_PEARL)) {
+        if (cause.equals(PlayerTeleportEvent.TeleportCause.ENDER_PEARL)) {
             evt.getPlayer().closeInventory();
             Location location = evt.getTo();
             if (this.isOutsideWorldBorder(location, false)) {
                 evt.setCancelled(true);
+
             }
         }
 

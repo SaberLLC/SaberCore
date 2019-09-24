@@ -31,18 +31,10 @@ public class Conf {
     public static boolean useOreTracker = true;
     public static double spawnerMineRadius = 200.0;
 
-    public static boolean useSaberPicks = true;
-    public static String saberPickDisplayName = "&c&lSaber Pickaxe";
-    public static List<String> saberPickLore = new ArrayList<>();
-    public static int saberPickEfficiencyLevel = 5;
-    public static int saberPickUnbreakingLevel = 10;
+    public static List<String> deniedItemStorage = new ArrayList<>();
     static{
-        saberPickLore.add("&f ");
-        saberPickLore.add("&4&l* &cRadius: &f{radius} x {radius}");
-        saberPickLore.add("&4&l* &cObtained from: &fstore.mystore.com");
-        saberPickLore.add("&f ");
-        saberPickLore.add("&7&o(( Tip: your &f&opickaxe&7&o will &a&oautomatically");
-        saberPickLore.add("&7&oswitch depending on the &a&oterrain&7&o! ))");
+        deniedItemStorage.add("MOB_SPAWNER");
+        deniedItemStorage.add("COOKIE");
     }
 
     public static boolean useChunkBusters = true;

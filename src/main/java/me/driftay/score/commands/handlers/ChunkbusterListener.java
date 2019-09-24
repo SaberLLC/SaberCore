@@ -118,10 +118,9 @@ public class ChunkbusterListener implements Listener {
                             multiplier++;
                             int dy = yy;
                             Bukkit.getScheduler().scheduleSyncDelayedTask(SaberCore.instance, () -> {
-                                int yy1 = dy;
                                 for (int zz = bz; zz < bz + 16; zz++) {
                                     for (int xx = bx; xx < bx + 16; xx++) {
-                                        Block block12 = world.getBlockAt(xx, yy1, zz);
+                                        Block block12 = world.getBlockAt(xx, dy, zz);
                                         if (block12.getType().equals(Material.AIR) || block12.getType().equals(XMaterial.SPAWNER.parseMaterial()) || block12.getType().equals(XMaterial.CHEST.parseMaterial()) || block12.getType().equals(XMaterial.TRAPPED_CHEST.parseMaterial())) {
                                             continue;
                                         }

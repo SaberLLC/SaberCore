@@ -30,6 +30,8 @@ public final class SaberCore extends JavaPlugin {
     public static SaberCore instance;
     private static Logger logger;
     private Persist persist;
+    public List<String> itemList = Conf.deniedItemStorage;
+
 
     public static void log(String message) {
         logger.log(Level.INFO, message);

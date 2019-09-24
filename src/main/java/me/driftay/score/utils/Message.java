@@ -41,6 +41,8 @@ public enum Message {
     JELLYLEGS_ON("jellylegs-on", "&c&l[!] &7You have togged jelly legs on!"),
     JELLYLEGS_OFF("jellylegs-off", "&c&l[!] &7You have togged jelly legs off!"),
 
+    CANNOT_STORE_ITEM("antistorage.cannot-store", "&c&l[!] &7You may not store &b{item}&7!"),
+
     // Death messages
     DM_PLAYER("deathmessages.player.without-weapon", "&c%victim% &fhas been killed by &b%killer%"),
     DM_PLAYER_WITH_WEAPON("deathmessages.player.with-weapon", "&c%victim% &fhas been killed by &b%killer% &fusing &r%weapon%"),

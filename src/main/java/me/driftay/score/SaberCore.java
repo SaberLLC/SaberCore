@@ -1,6 +1,6 @@
 package me.driftay.score;
 
-import me.driftay.score.commands.*;
+import me.driftay.score.commands.command.*;
 import me.driftay.score.commands.handlers.ChunkbusterListener;
 import me.driftay.score.commands.handlers.HarvesterHoeListener;
 import me.driftay.score.commands.handlers.ShockwaveListener;
@@ -94,6 +94,10 @@ public final class SaberCore extends JavaPlugin {
 
 
     private void registerBooleans() {
+        if(Conf.denyIronGolemsTargetZombies){
+            getServer().getPluginManager().registerEvents(new IronGolemAI(), this);
+        }
+
         if(Conf.useShockwaves){
             getServer().getPluginManager().registerEvents(new ShockwaveListener(), this);
             getCommand("shockwave").setExecutor(new CmdShockwave());

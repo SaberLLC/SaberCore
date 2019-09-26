@@ -1,4 +1,4 @@
-package me.driftay.score.commands;
+package me.driftay.score.commands.command;
 
 import me.driftay.score.config.Conf;
 import org.bukkit.command.Command;

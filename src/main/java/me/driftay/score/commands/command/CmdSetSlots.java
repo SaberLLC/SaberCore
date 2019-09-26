@@ -1,4 +1,4 @@
-package me.driftay.score.commands;
+package me.driftay.score.commands.command;
 
 import me.driftay.score.SaberCore;
 import org.bukkit.command.CommandExecutor;

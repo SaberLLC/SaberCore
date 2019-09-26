@@ -41,6 +41,9 @@ public enum Message {
     JELLYLEGS_ON("jellylegs-on", "&c&l[!] &7You have togged jelly legs on!"),
     JELLYLEGS_OFF("jellylegs-off", "&c&l[!] &7You have togged jelly legs off!"),
 
+    SHOCKWAVE_COMMAND_USAGE("shockwave.command-usage", "&c&l[!] &7Try /shockwave give <pickaxe/shovel/hoe> <radius> <player>"),
+    SHOCKWAVE_RECEIVED_MESSAGE("shockwave.received", "&c&l[!] &7You have received a shockwave tool!"),
+
     CANNOT_STORE_ITEM("antistorage.cannot-store", "&c&l[!] &7You may not store &b{item}&7!"),
 
     // Death messages

@@ -3,6 +3,7 @@ package me.driftay.score;
 import me.driftay.score.commands.*;
 import me.driftay.score.commands.handlers.ChunkbusterListener;
 import me.driftay.score.commands.handlers.HarvesterHoeListener;
+import me.driftay.score.commands.handlers.ShockwaveListener;
 import me.driftay.score.config.Conf;
 import me.driftay.score.config.Persist;
 import me.driftay.score.exempt.*;
@@ -93,6 +94,11 @@ public final class SaberCore extends JavaPlugin {
 
 
     private void registerBooleans() {
+        if(Conf.useShockwaves){
+            getServer().getPluginManager().registerEvents(new ShockwaveListener(), this);
+            getCommand("shockwave").setExecutor(new CmdShockwave());
+        }
+
         if(Conf.useOreTracker){
             getServer().getPluginManager().registerEvents(new OreTracker(), this);
         }
@@ -142,6 +148,7 @@ public final class SaberCore extends JavaPlugin {
         }
         if (Conf.useSpawnerSponge) {
             getServer().getPluginManager().registerEvents(new SpawnerSponge(), this);
+            getServer().getPluginManager().registerEvents(new SoakSponge(), this);
         }
         if (Conf.useRegionListener) {
             getServer().getPluginManager().registerEvents(new RegionListener(), this);

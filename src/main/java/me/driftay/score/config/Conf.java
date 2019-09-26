@@ -36,6 +36,24 @@ public class Conf {
         deniedItemStorage.add("MOB_SPAWNER");
         deniedItemStorage.add("COOKIE");
     }
+    public static boolean useShockwaves = true;
+    public static String shockwaveDisplayName = "&c&lShockwave Tool";
+    public static int shockwaveEfficiencyLevel = 5;
+    public static int shockwaveUnbreakingLevel = 3;
+    public static List<String> shockwavePickaxeLore = new ArrayList<>();
+    public static List<String> shockwaveShovelLore = new ArrayList<>();
+    public static List<String> shockwaveHoeLore = new ArrayList<>();
+    static{
+        shockwavePickaxeLore.add("&f");
+        shockwavePickaxeLore.add("&4&l* &cRadius: &f{radius}x{radius}");
+
+        shockwaveShovelLore.add("&f");
+        shockwaveShovelLore.add("&4&l* &cRadius: &f{radius}x{radius}");
+
+        shockwaveHoeLore.add("&f");
+        shockwaveHoeLore.add("&4&l* &cRadius: &f{radius}x{radius}");
+    }
+
 
     public static boolean useChunkBusters = true;
     public static String chunkBusterDisplayName = "&cChunkBuster";

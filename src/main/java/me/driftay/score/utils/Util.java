@@ -6,9 +6,11 @@ import me.driftay.score.SaberCore;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -34,7 +36,7 @@ public class Util {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
 
-    public static List<String> colorList(List<String> string) {
+    public static List<String> color(List<String> string) {
         List<String> colored = new ArrayList<>();
         for (String line : string) {
             colored.add(color(line));
@@ -86,6 +88,15 @@ public class Util {
             e.printStackTrace();
         }
         return (ImmutableSet.copyOf(classes));
+    }
+
+    public static ItemStack createItem(Material material, int amount, short datavalue, String name, List<String> lore) {
+        ItemStack item = new ItemStack(material, amount, datavalue);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(color(name));
+        meta.setLore(color(lore));
+        item.setItemMeta(meta);
+        return item;
     }
 
     public static String convertItemToJson(ItemStack item) {

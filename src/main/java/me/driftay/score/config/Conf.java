@@ -32,6 +32,16 @@ public class Conf {
     public static boolean useOreTracker = true;
     public static double spawnerMineRadius = 200.0;
 
+    public static List<String> playerInfoFormat = new ArrayList<>();
+    static {
+        playerInfoFormat.add("&b{player}'s Information");
+        playerInfoFormat.add("&7 * XYZ: {x}, {y}, {z}");
+        playerInfoFormat.add("&7 * Health: {health}");
+        playerInfoFormat.add("&7 * Fly Speed: {flyspeed}");
+        playerInfoFormat.add("&7 * Ping: {ping}");
+    }
+
+
     public static List<String> deniedItemStorage = new ArrayList<>();
     static{
         deniedItemStorage.add("MOB_SPAWNER");

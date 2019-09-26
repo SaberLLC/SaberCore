@@ -90,6 +90,7 @@ public final class SaberCore extends JavaPlugin {
         getCommand("sabercore").setExecutor(new CmdReload());
         getCommand("ping").setExecutor(new CmdPing());
         getCommand("setslots").setExecutor(new CmdSetSlots(this));
+        getCommand("playerinfo").setExecutor(new CmdPlayerInfo());
     }
 
 

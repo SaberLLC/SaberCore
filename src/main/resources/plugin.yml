@@ -5,6 +5,8 @@ author: Driftay
 commands:
   sabercore:
     description: base command for core
+  playerinfo:
+    description: base command for player info
   shockwave:
     description: base command for shockwaves
   chunkbuster:

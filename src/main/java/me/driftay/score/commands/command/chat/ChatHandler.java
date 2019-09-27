@@ -9,17 +9,17 @@ import java.util.regex.Pattern;
 
 public class ChatHandler {
 
-    private static final Pattern URL_REGEX = Pattern.compile(
+    private final Pattern URL_REGEX = Pattern.compile(
             "^(http://www\\.|https://www\\.|http://|https://)?[a-z0-9]+([\\-.][a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(/.*)?$");
-    private static final Pattern IP_REGEX = Pattern.compile(
+    private final Pattern IP_REGEX = Pattern.compile(
             "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])([.,])){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$");
 
 
     public static int delayTime = Conf.slowChatTime;
     public static boolean chatMuted = false;
-    public static List<String> LINK_WHITELIST = Conf.whitelistedLinks;
-    public static List<String> filteredWords = Conf.filteredWords;
-    public static List<String> filteredPhrases = Conf.filteredPhrases;
+    public List<String> LINK_WHITELIST = Conf.whitelistedLinks;
+    public List<String> filteredWords = Conf.filteredWords;
+    public List<String> filteredPhrases = Conf.filteredPhrases;
 
 
     public boolean shouldFilter(String message) {

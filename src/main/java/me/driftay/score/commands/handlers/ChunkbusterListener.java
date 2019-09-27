@@ -91,25 +91,27 @@ public class ChunkbusterListener implements Listener {
                         }
                     }
                 }, 0);
-                if (Conf.chunkBusterHologram) {
-                    Hologram hologram = HologramsAPI.createHologram(SaberCore.instance, b.getLocation().add(0.5, 1.5, 0.5));
-                    hologram.appendTextLine(color(Conf.chunkBusterHologramFormat));
-                    Bukkit.getScheduler().runTaskTimer(SaberCore.instance, new Runnable() {
-                        int timer = Conf.chunkBusterWarmup;
+                if (Bukkit.getPluginManager().getPlugin("HolographicDisplays") != null) {
+                    if (Conf.chunkBusterHologram) {
+                        Hologram hologram = HologramsAPI.createHologram(SaberCore.instance, b.getLocation().add(0.5, 1.5, 0.5));
+                        hologram.appendTextLine(color(Conf.chunkBusterHologramFormat));
+                        Bukkit.getScheduler().runTaskTimer(SaberCore.instance, new Runnable() {
+                            int timer = Conf.chunkBusterWarmup;
 
-                        @Override
-                        public void run() {
-                            if (timer == 0) {
-                                hologram.delete();
-                                return;
+                            @Override
+                            public void run() {
+                                if (timer == 0) {
+                                    hologram.delete();
+                                    return;
+                                }
+                                if (hologram.size() == 2) {
+                                    hologram.getLine(1).removeLine();
+                                }
+                                hologram.appendTextLine((ChatColor.DARK_RED + "" + timer));
+                                timer--;
                             }
-                            if (hologram.size() == 2) {
-                                hologram.getLine(1).removeLine();
-                            }
-                            hologram.appendTextLine((ChatColor.DARK_RED + "" + timer));
-                            timer--;
-                        }
-                    }, 0L, 20L);
+                        }, 0L, 20L);
+                    }
                 }
                 if (Conf.chunkbusterAsyncMode) {
                     Bukkit.getScheduler().scheduleSyncDelayedTask(SaberCore.instance, () -> {

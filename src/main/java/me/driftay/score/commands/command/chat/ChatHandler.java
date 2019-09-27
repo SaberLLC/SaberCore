@@ -2,7 +2,6 @@ package me.driftay.score.commands.command.chat;
 
 import me.driftay.score.config.Conf;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

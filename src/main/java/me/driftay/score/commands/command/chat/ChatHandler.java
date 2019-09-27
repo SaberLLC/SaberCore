@@ -17,9 +17,6 @@ public class ChatHandler {
 
     public static int delayTime = Conf.slowChatTime;
     public static boolean chatMuted = false;
-    public List<String> LINK_WHITELIST = Conf.whitelistedLinks;
-    public List<String> filteredWords = Conf.filteredWords;
-    public List<String> filteredPhrases = Conf.filteredPhrases;
 
 
     public boolean shouldFilter(String message) {
@@ -36,7 +33,7 @@ public class ChatHandler {
 
         String[] words = msg.trim().split(" ");
         for (String word : words) {
-            for (String filteredWord : filteredWords) {
+            for (String filteredWord : Conf.filteredWords) {
                 if (word.contains(filteredWord)) {
                     return true;
                 }
@@ -44,7 +41,7 @@ public class ChatHandler {
         }
         for (String word : message.replace("(dot)", ".").replace("[dot]", ".").trim().split(" ")) {
             boolean continueIt = false;
-            for (String phrase : LINK_WHITELIST) {
+            for (String phrase : Conf.whitelistedLinks) {
                 if (word.toLowerCase().contains(phrase)) {
                     continueIt = true;
                     break;
@@ -62,7 +59,7 @@ public class ChatHandler {
                 return true;
             }
         }
-        Optional<String> optional = filteredPhrases.stream().filter(msg::contains).findFirst();
+        Optional<String> optional = Conf.filteredPhrases.stream().filter(msg::contains).findFirst();
         return optional.isPresent();
     }
 

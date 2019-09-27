@@ -13,6 +13,7 @@ public class Conf {
     public static boolean useAntiMobMoving = true;
     public static boolean useAntiMobTargeting = true;
     public static int lffCooldownSeconds = 30;
+    public static int slowChatTime = 0;
     public static int enderPearlCooldown = 15;
     public static boolean useAntiCobbleMonster = true;
     public static boolean useAutoRespawn = true;
@@ -31,6 +32,28 @@ public class Conf {
     public static boolean useAntiSpawnerMine = true;
     public static boolean useOreTracker = true;
     public static double spawnerMineRadius = 200.0;
+
+
+    public static String chatFilterFormat = "&b&l[Filtered] &e{player}&f: {message}";
+    public static List<String> filteredWords = new ArrayList<>();
+    public static List<String> filteredPhrases = new ArrayList<>();
+    public static List<String> whitelistedLinks = new ArrayList<>();
+
+    static{
+        filteredWords.add("nigger");
+        filteredWords.add("faggot");
+        filteredWords.add("queer");
+        filteredWords.add("slut");
+        filteredWords.add("whore");
+
+        filteredPhrases.add("Saber is awesome");
+
+        whitelistedLinks.add("youtube.com");
+        whitelistedLinks.add("gyazo.com");
+        whitelistedLinks.add("discord.gg");
+        whitelistedLinks.add("twitter.com");
+        whitelistedLinks.add("saber.dev");
+    }
 
     public static List<String> playerInfoFormat = new ArrayList<>();
     static {

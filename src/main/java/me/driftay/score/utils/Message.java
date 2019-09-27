@@ -12,7 +12,9 @@ public enum Message {
 
     PING_YOURSELF("ping-yourself", "&c&l[!] &7Your ping is &b%ping%ms&7."),
     PING_OTHER("ping-other", "&c&l[!] &b%player%'s &7ping is &b%ping%&7."),
-
+    SLOW_CHAT_COOLDOWN("slowchat.cooldown", "&c&l[!] &7You can chat again in &b&l{time} &7seconds."),
+    SLOW_CHAT_BROADCAST("slowchat.broadcast", "&cPublic chat has been slowed"),
+    MUTE_CHAT_TOGGLED("mute-chat.toggled", "&ePublic Chat has been &d{context} &eby {player}"),
     ANTI_SPAWNER_MINE_PLAYERS_NEAR("anti-spawner-mine-players-near", "&c&l[!] &7You may not break spawners while enemies are near!"),
 
     ENDERPEARL_ON_COOLDOWN("enderpearl-on-cooldown", "&c&l[!] &7You cannot use another enderpearl for &b%time%&7!"),

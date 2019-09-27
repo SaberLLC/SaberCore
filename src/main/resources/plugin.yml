@@ -3,6 +3,10 @@ version: ${project.version}
 main: me.driftay.score.SaberCore
 author: Driftay
 commands:
+  slowchat:
+    description: base command for slowchat
+  mutechat:
+    description: base command for mutechat
   sabercore:
     description: base command for core
   playerinfo:
@@ -34,6 +38,8 @@ commands:
   recycle:
     description: base command for recycling bottles
 permissions:
+  sabercore.staff:
+    description: Allows players to use general staff commands in sabercore
   sabercore.reload:
     description: Allows access to reload SaberCore
   sabercore.disabledcommands.bypass:

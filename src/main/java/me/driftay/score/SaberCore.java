@@ -1,6 +1,8 @@
 package me.driftay.score;
 
 import me.driftay.score.commands.command.*;
+import me.driftay.score.commands.command.chat.CmdMuteChat;
+import me.driftay.score.commands.command.chat.CmdSlowChat;
 import me.driftay.score.commands.handlers.ChunkbusterListener;
 import me.driftay.score.commands.handlers.HarvesterHoeListener;
 import me.driftay.score.commands.handlers.ShockwaveListener;
@@ -10,6 +12,8 @@ import me.driftay.score.exempt.*;
 import me.driftay.score.exempt.mobs.*;
 import me.driftay.score.file.CustomFile;
 import me.driftay.score.file.impl.MessageFile;
+import me.driftay.score.commands.command.chat.ChatHandler;
+import me.driftay.score.commands.command.chat.ChatListener;
 import me.driftay.score.hooks.HookManager;
 import me.driftay.score.hooks.PluginHook;
 import me.driftay.score.hooks.impl.FactionHook;
@@ -32,6 +36,7 @@ public final class SaberCore extends JavaPlugin {
     private static Logger logger;
     private Persist persist;
     public List<String> itemList = Conf.deniedItemStorage;
+    private ChatHandler chatHandler;
 
 
     public static void log(String message) {
@@ -52,9 +57,11 @@ public final class SaberCore extends JavaPlugin {
         instance = this;
         logger = this.getLogger();
         registerListeners();
+        getServer().getPluginManager().registerEvents(new ChatListener(), this);
         registerBooleans();
         persist = new Persist();
         getDataFolder().mkdirs();
+        this.chatHandler = new ChatHandler();
         Conf.load();
         Collections.singletonList(new MessageFile()).forEach(CustomFile::init);
         registerCommands();
@@ -91,6 +98,8 @@ public final class SaberCore extends JavaPlugin {
         getCommand("ping").setExecutor(new CmdPing());
         getCommand("setslots").setExecutor(new CmdSetSlots(this));
         getCommand("playerinfo").setExecutor(new CmdPlayerInfo());
+        getCommand("mutechat").setExecutor(new CmdMuteChat());
+        getCommand("slowchat").setExecutor(new CmdSlowChat());
     }
 
 
@@ -183,6 +192,8 @@ public final class SaberCore extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new AntiBabyZombie(), this);
         }
     }
+    public ChatHandler getChatHandler() { return chatHandler; }
+
     public Persist getPersist() {
         return persist;
     }

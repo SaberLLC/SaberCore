@@ -75,7 +75,7 @@ public final class SaberCore extends JavaPlugin {
     }
 
     public void onDisable() {
-        Conf.save();
+        instance = null;
     }
 
     private void registerListeners() {

@@ -3,7 +3,10 @@ package me.driftay.score.commands.handlers;
 import com.massivecraft.factions.*;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import itemnbtapi.NBTItem;
+import me.driftay.score.SaberCore;
 import me.driftay.score.utils.XMaterial;
+import net.coreprotect.CoreProtect;
+import net.coreprotect.CoreProtectAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -33,7 +36,6 @@ public class ShockwaveListener implements Listener {
             }
         }
     }
-
 
     private WorldGuardPlugin getWorldGuard() {
         Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("WorldGuard");
@@ -83,6 +85,9 @@ public class ShockwaveListener implements Listener {
                     if (fac.isWilderness() || fac.getId().equals(UUIDfac.getId())) {
                         p.getInventory().addItem(new ItemStack(loc.getBlock().getType()));
                         loc.getBlock().setType(Material.AIR);
+                        if(Bukkit.getPluginManager().getPlugin("CoreProtect") != null){
+                            CoreProtect.getInstance().getAPI().logRemoval(p.getName(), loc, loc.getBlock().getType(), loc.getBlock().getData());
+                        }
                     }
                 }
             }

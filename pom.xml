@@ -101,6 +101,13 @@
             <systemPath>${project.basedir}/dependencies/Factions.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>com.coreprotect</groupId>
+            <artifactId>coreprotect</artifactId>
+            <scope>system</scope>
+            <version>2.0</version>
+            <systemPath>${project.basedir}/dependencies/CoreProtect_2.12.0.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>VaultAPI</artifactId>
             <version>1.6</version>

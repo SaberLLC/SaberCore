@@ -189,7 +189,7 @@ public final class SaberCore extends JavaPlugin {
     }
     public ChatHandler getChatHandler() { return chatHandler; }
 
-    public static String startUpString(){
+    private static String startUpString(){
         return "\n" +
                 "  ██████  ▄▄▄       ▄▄▄▄   ▓█████  ██▀███   ▄████▄   ▒█████   ██▀███  ▓█████ \n" +
                 "▒██    ▒ ▒████▄    ▓█████▄ ▓█   ▀ ▓██ ▒ ██▒▒██▀ ▀█  ▒██▒  ██▒▓██ ▒ ██▒▓█   ▀ \n" +

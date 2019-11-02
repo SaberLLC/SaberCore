@@ -1,6 +1,5 @@
 package me.driftay.score.utils;
 
-import me.driftay.score.config.Conf;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -12,9 +11,9 @@ public class ItemCreation {
     public static ItemStack giveChunkBuster(int amount) {
         ItemStack busterItem = new ItemStack(XMaterial.END_PORTAL_FRAME.parseMaterial());
         ItemMeta meta = busterItem.getItemMeta();
-        meta.setDisplayName(Util.color(Conf.chunkBusterDisplayName));
+        meta.setDisplayName(Util.color(Util.config.getString("Chunkbuster.Item.DisplayName")));
         List<String> lore = new ArrayList<>();
-        for (String s : Conf.chunkBusterLore) {
+        for (String s : Util.config.getStringList("Chunkbuster.Item.Lore")) {
             lore.add(Util.color(s));
         }
         meta.setLore(lore);
@@ -26,9 +25,9 @@ public class ItemCreation {
     public static ItemStack giveHarvesterHoe(int amount) {
         ItemStack harvesterItem = new ItemStack(XMaterial.DIAMOND_HOE.parseMaterial());
         ItemMeta meta = harvesterItem.getItemMeta();
-        meta.setDisplayName(Util.color(Conf.harvesterHoeDisplayName));
+        meta.setDisplayName(Util.color(Util.config.getString("HarvesterHoe.Item.DisplayName")));
         List<String> lore = new ArrayList<>();
-        for (String s : Conf.harvesterHoeLore) {
+        for (String s : Util.config.getStringList("HarvesterHoe.Item.Lore")) {
             lore.add(Util.color(s));
         }
         meta.setLore(lore);

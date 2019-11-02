@@ -1,6 +1,6 @@
 package me.driftay.score.commands.command;
 
-import me.driftay.score.config.Conf;
+import me.driftay.score.SaberCore;
 import me.driftay.score.utils.Message;
 import me.driftay.score.utils.Util;
 import org.bukkit.Bukkit;
@@ -17,7 +17,7 @@ public class CmdPlayerInfo implements CommandExecutor {
                 if (sender.hasPermission("sabercore.playerinfo")) {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (Bukkit.getPlayer(args[0]) != null) {
-                        Conf.playerInfoFormat.forEach(line -> sender.sendMessage(Util.color(line)
+                        SaberCore.instance.getConfig().getStringList("PlayerInfo.Format").forEach(line -> sender.sendMessage(Util.color(line)
                                 .replace("{x}", String.valueOf(Math.round(target.getLocation().getX())))
                                 .replace("{y}", String.valueOf(Math.round(target.getLocation().getY())))
                                 .replace("{z}", String.valueOf(Math.round(target.getLocation().getZ())))
@@ -34,7 +34,7 @@ public class CmdPlayerInfo implements CommandExecutor {
             }
         } else {
             Player p = (Player) sender;
-            Conf.playerInfoFormat.forEach(line -> sender.sendMessage(Util.color(line)
+            SaberCore.instance.getConfig().getStringList("PlayerInfo.Format").forEach(line -> sender.sendMessage(Util.color(line)
                     .replace("{x}", String.valueOf(Math.round(p.getLocation().getX())))
                     .replace("{y}", String.valueOf(Math.round(p.getLocation().getY())))
                     .replace("{z}", String.valueOf(Math.round(p.getLocation().getZ())))

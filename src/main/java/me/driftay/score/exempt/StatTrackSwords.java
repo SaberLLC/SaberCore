@@ -1,6 +1,6 @@
 package me.driftay.score.exempt;
 
-import me.driftay.score.config.Conf;
+import me.driftay.score.utils.Util;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -37,7 +37,7 @@ public class StatTrackSwords implements Listener {
         }
 
         List<String> lore = new ArrayList<>();
-        for (String string : Conf.statTrackSwordsLore) {
+        for (String string : Util.config.getStringList("StatTrack-Swords.Lore")) {
             if (killItem.hasItemMeta() && killItem.getItemMeta().hasLore()) {
                 if (killItem.getItemMeta().getLore().size() > 10) {
                     return;

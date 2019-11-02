@@ -3,11 +3,11 @@ package me.driftay.score.commands.handlers;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import me.driftay.score.SaberCore;
-import me.driftay.score.config.Conf;
 import me.driftay.score.hooks.HookManager;
 import me.driftay.score.hooks.impl.FactionHook;
 import me.driftay.score.hooks.impl.WorldGuardHook;
 import me.driftay.score.utils.Message;
+import me.driftay.score.utils.Util;
 import me.driftay.score.utils.XMaterial;
 import net.coreprotect.CoreProtect;
 import org.bukkit.*;
@@ -37,7 +37,7 @@ public class ChunkbusterListener implements Listener {
         Block block = e.getBlock();
 
         if (e.getItemInHand().getType().equals(XMaterial.END_PORTAL_FRAME.parseMaterial())) {
-            if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(color(Conf.chunkBusterDisplayName))) {
+            if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(color(Util.config.getString("Chunkbuster.Item.DisplayName")))) {
                 Block b = e.getBlockPlaced();
 
                 if (HookManager.getPluginMap().get("WorldGuard") != null) {
@@ -92,11 +92,11 @@ public class ChunkbusterListener implements Listener {
                     }
                 }, 0);
                 if (Bukkit.getPluginManager().getPlugin("HolographicDisplays") != null) {
-                    if (Conf.chunkBusterHologram) {
+                    if (Util.config.getBoolean("Chunkbuster.Hologram.Enabled")) {
                         Hologram hologram = HologramsAPI.createHologram(SaberCore.instance, b.getLocation().add(0.5, 1.5, 0.5));
-                        hologram.appendTextLine(color(Conf.chunkBusterHologramFormat));
+                        hologram.appendTextLine(color(Util.config.getString("Chunkbuster.Hologram.Format")));
                         Bukkit.getScheduler().runTaskTimer(SaberCore.instance, new Runnable() {
-                            int timer = Conf.chunkBusterWarmup;
+                            int timer = Util.config.getInt("Chunkbuster.Warmup");
 
                             @Override
                             public void run() {
@@ -113,7 +113,7 @@ public class ChunkbusterListener implements Listener {
                         }, 0L, 20L);
                     }
                 }
-                if (Conf.chunkbusterAsyncMode) {
+                if (Util.config.getBoolean("Chunkbuster.Async-Mode")) {
                     Bukkit.getScheduler().scheduleSyncDelayedTask(SaberCore.instance, () -> {
                         int multiplier = 0;
                         for (int yy = e.getBlockPlaced().getY(); yy >= 0; yy--) {
@@ -138,7 +138,7 @@ public class ChunkbusterListener implements Listener {
                             }, 20L * multiplier);
 
                         }
-                    }, Conf.chunkBusterWarmup * 20L);
+                    }, Util.config.getInt("Chunkbuster.Warmup") * 20L);
                 } else {
                     Bukkit.getScheduler().scheduleSyncDelayedTask(SaberCore.instance, () -> {
                         for (int xx = bx; xx < bx + 16; xx++) {
@@ -158,7 +158,7 @@ public class ChunkbusterListener implements Listener {
                                 beingBusted.remove(e.getBlock().getChunk());
                             }
                         }
-                    }, Conf.chunkBusterWarmup * 20L);
+                    }, Util.config.getInt("Chunkbuster.Warmup") * 20L);
                 }
             }
         }

@@ -1,7 +1,6 @@
 package me.driftay.score.commands.command;
 
 import itemnbtapi.NBTItem;
-import me.driftay.score.config.Conf;
 import me.driftay.score.utils.Message;
 import me.driftay.score.utils.Util;
 import org.bukkit.Bukkit;
@@ -37,20 +36,20 @@ public class CmdShockwave implements CommandExecutor {
                     if (args[1].equalsIgnoreCase("shovel")) args[1] = "spade";
                     Material material = Material.getMaterial("DIAMOND_" + args[1].toUpperCase());
 
-                    String name = Util.color(Conf.shockwaveDisplayName);
+                    String name = Util.color(Util.config.getString("Shockwave.Item.DisplayName"));
                     name = name.replace("{radius}", args[2]);
                     List<String> lore = null;
                     if (args[1].equalsIgnoreCase("pickaxe")) {
                         name = name.replace("{itemtype}", "Pickaxe");
-                        lore = Util.color(Conf.shockwavePickaxeLore);
+                        lore = Util.color(Util.config.getStringList("Shockwave.Item.Lore"));
                     }
                     if (args[1].equalsIgnoreCase("spade")) {
                         name = name.replace("{itemtype}", "Shovel");
-                        lore = Util.color(Conf.shockwaveShovelLore);
+                        lore = Util.color(Util.config.getStringList("Shockwave.Item.Lore"));
                     }
                     if (args[1].equalsIgnoreCase("hoe")) {
                         name = name.replace("{itemtype}", "Hoe");
-                        lore = Util.color(Conf.shockwaveHoeLore);
+                        lore = Util.color(Util.config.getStringList("Shockwave.Item.Lore"));
                     }
                     if (lore != null) {
                         for (int i = 0; i <= lore.size() - 1; i++) {
@@ -58,8 +57,8 @@ public class CmdShockwave implements CommandExecutor {
                         }
                     }
                     ItemStack shockwaveItem = Util.createItem(material, 1, (short) 0, name, lore);
-                    shockwaveItem.addUnsafeEnchantment(Enchantment.DIG_SPEED, Conf.shockwaveEfficiencyLevel);
-                    shockwaveItem.addUnsafeEnchantment(Enchantment.DURABILITY, Conf.shockwaveUnbreakingLevel);
+                    shockwaveItem.addUnsafeEnchantment(Enchantment.DIG_SPEED, Util.config.getInt("Shockwave.Efficiency-Level"));
+                    shockwaveItem.addUnsafeEnchantment(Enchantment.DURABILITY, Util.config.getInt("Shockwave.Unbreaking-Level"));
                     sender.sendMessage(Message.SHOCKWAVE_RECEIVED_MESSAGE.getMessage());
                     NBTItem nbti = new NBTItem(shockwaveItem);
                     nbti.setBoolean("Shockwave", true);

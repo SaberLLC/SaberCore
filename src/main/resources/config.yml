@@ -1,0 +1,209 @@
+#######################################################################################
+#######################################################################################
+#######################################################################################
+#####                                                                             #####
+#####                              SaberCore                                      #####
+#####                         Created By Driftay                                  #####
+#####                                                                             #####
+#######################################################################################
+#######################################################################################
+#######################################################################################
+#<-------------------------------------->NOTES<-------------------------------------->#
+#All Color Codes Can Be Used!
+#Refer to: https://wiki.ess3.net/mc/
+#Enable and Disable Any Feature by Simply Switching Variable to true or false!
+#<-------------------------------------->NOTES<-------------------------------------->#
+############################################################
+# +------------------------------------------------------+ #
+# |                        MISC                          | #
+# +------------------------------------------------------+ #
+############################################################
+useAntiZombieBaby: true #Denies baby Zombies & baby Zombie Pigmen from spawning
+reduceIronGolemHealth: true
+denyIronGolemsTargetZombies: true #Denies Iron Golems Targeting on Zombies
+ironGolemHealth: 5.0 #5.0 = 10 Hearts
+denyExplosionDamage: true #Denies all explosion damage to players
+useAntiMobAI: true #Denies Mobs from moving
+useAntiMobTargeting: true #Denies Mobs from targeting players
+lffCooldown: 30 #Lff Command Cooldown in Seconds
+slowChatTime: 0 #Timer for SlowChat Command.
+enderPearlCooldown: 15 #Cooldown in Seconds
+useAntiCobbleMonster: true #Denies Lava and Water being mixed to possibly make cobble monsters
+useAutoRespawn: true #AutoRespawn players on death
+useAntiWildernessSpawner: true #Denies Spawners from spawning when in placed in Wilderness (Avoids Boosting and Vaults)
+useAntiBoatPlacement: true #Denies players from placing and using Minecarts and Boats (2 Highly glitchable items in factions)
+denyPistonFarming: true #Will Not allow crops to be broken by pistons (Lag Machines can be turned into automatic farms)
+instaSpongeBreak: true #Allows Sponges to be instantly breakable
+cancelDragonEggTeleport: true #DragonEggs will not teleport when right clicked
+denyNaturalMobSpawning: true #Denies all natural mobs from spawning
+denyBlazeWaterDamage: true #Blazes will not take damage from water
+useBookDisenchant: true #Left clicking a enchantment table with a enchanted book will convert it back to its original form (HCF Style)
+useOreTracker: false #Adds a HCF Style ore tracker to pickaxes.
+
+############################################################
+# +------------------------------------------------------+ #
+# |                    Chunkbusters                      | #
+# +------------------------------------------------------+ #
+############################################################
+Chunkbuster:
+  Enabled: true
+  Warmup: 10 #In Seconds, timer will run before busting chunk.
+  Async-Mode: false #Will Destroy Layer By Layer if Enabled.
+  Hologram:
+    Enabled: true #Requires Holographic Displays
+    Format: '&c&l[!] &7ChunkBuster' #Hologram Format for Chunkbuster When Placed
+  Item:
+    DisplayName: '&cChunkBuster'
+    Lore:
+      - '&7A &cpowerful &7piece of &calien tech'
+      - '&7Destroys the chunk it is placed in!'
+
+############################################################
+# +------------------------------------------------------+ #
+# |                   Harvester Hoes                     | #
+# +------------------------------------------------------+ #
+############################################################
+HarvesterHoe:
+  Enabled: true
+  AutoSell: false #Will Automatically Sell All Sugar Cane Broken
+  SugarCanePrice: 0.5 #The Cost Per Sugar Cane
+  Item:
+    DisplayName: '&aHarvester Hoe'
+    Lore:
+      - '&7When Mined, Places Sugar Cane Directly,'
+      - '&7Into Your Inventory!'
+
+############################################################
+# +------------------------------------------------------+ #
+# |                    Shockwaves                        | #
+# +------------------------------------------------------+ #
+############################################################
+Shockwave:
+  Enabled: true #Enable or Disable Shockwaves
+  Log-Core-Protect: false #REQUIRES CORE PROTECT TO BE INSTALLED!
+  Efficiency: 5
+  Unbreaking: 3
+  Item:
+    DisplayName: '&c&lShockwave Tool'
+    Lore:
+      - '&f'
+      - '&4&l* &cRadius: &f{radius}x{radius}'
+
+############################################################
+# +------------------------------------------------------+ #
+# |                    PlayerInfo                        | #
+# +------------------------------------------------------+ #
+############################################################
+PlayerInfo:
+  Format:
+    - "&b{player}'s Information"
+    - "&7 * XYZ: {x}, {y}, {z}"
+    - "&7 * Health: {health}"
+    - "&7 * Fly Speed: {flyspeed}"
+    - "&7 * Ping: {ping}"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                  SpawnerSponges                      | #
+# +------------------------------------------------------+ #
+############################################################
+SpawnerSponge: #Spawners will act as sponges and soak lava and water up
+  #NOTE: Sponges function the same way!
+  Enabled: true
+  Radius: 3
+
+############################################################
+# +------------------------------------------------------+ #
+# |                    ChatFilter                        | #
+# +------------------------------------------------------+ #
+############################################################
+ChatFilter:
+  Format: '&b&l[Filtered] &e{player}&f: {message}'
+  Filtered-Words:
+    - nigger
+    - faggot
+    - queer
+    - slut
+    - whore
+  Whitelisted-Links:
+    - youtube.com
+    - gyazo.com
+    - discord.gg
+    - twitter.com
+    - saber.dev
+  Filtered-Phrases:
+    - Saber is Awesome!
+
+############################################################
+# +------------------------------------------------------+ #
+# |                 AntiSpawnerMine                      | #
+# +------------------------------------------------------+ #
+############################################################
+AntiSpawnerMine:
+  Enabled: true
+  Radius: 200.0
+
+############################################################
+# +------------------------------------------------------+ #
+# |                  DisabledCommands                    | #
+# +------------------------------------------------------+ #
+############################################################
+DisabledCommands:
+  Enable: true
+  Commands:
+    - /icanhasbukkit
+    - /ver
+    - /version
+    - /pl
+    - /?
+    - /plugins
+
+############################################################
+# +------------------------------------------------------+ #
+# |                  StatTrack Swords                    | #
+# +------------------------------------------------------+ #
+############################################################
+StatTrack-Swords:
+  Enabled: false
+  Lore:
+    - '&6{date} &e{player} &fwas killed by &e{killer}'
+
+############################################################
+# +------------------------------------------------------+ #
+# |                   AntiItemDestroy                    | #
+# +------------------------------------------------------+ #
+############################################################
+useAntiDestroySystem: true #Denies everything below to be destroyed by its specific group: Lightning, Explosion, Fire
+Lightning-Deny:
+  - "DIAMOND_HELMET"
+  - "DIAMOND_CHESTPLATE"
+  - "DIAMOND_LEGGINGS"
+  - "DIAMOND_BOOTS"
+  - "DIAMOND_SWORD"
+  - "DIAMOND_AXE"
+  - "DIAMOND_PICKAXE"
+  - "MOB_SPAWNER"
+  - "HOPPER"
+
+Explosion-Deny:
+  - "DIAMOND_HELMET"
+  - "DIAMOND_CHESTPLATE"
+  - "DIAMOND_LEGGINGS"
+  - "DIAMOND_BOOTS"
+  - "DIAMOND_SWORD"
+  - "DIAMOND_AXE"
+  - "DIAMOND_PICKAXE"
+  - "MOB_SPAWNER"
+  - "HOPPER"
+
+Burn-Deny:
+  - "DIAMOND_HELMET"
+  - "DIAMOND_CHESTPLATE"
+  - "DIAMOND_LEGGINGS"
+  - "DIAMOND_BOOTS"
+  - "DIAMOND_SWORD"
+  - "DIAMOND_AXE"
+  - "DIAMOND_PICKAXE"
+  - "MOB_SPAWNER"
+  - "HOPPER"
+

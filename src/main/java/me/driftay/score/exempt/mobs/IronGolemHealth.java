@@ -1,8 +1,6 @@
 package me.driftay.score.exempt.mobs;
 
-import me.driftay.score.config.Conf;
 import me.driftay.score.utils.Util;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.event.EventHandler;
@@ -19,6 +17,6 @@ public class IronGolemHealth implements Listener {
 			return;
 
 		IronGolem ironGolem = (IronGolem) event.getEntity();
-		ironGolem.setHealth(Conf.irongolemsHealth);
+		ironGolem.setHealth(Util.config.getDouble("ironGolemHealth"));
 	}
 }

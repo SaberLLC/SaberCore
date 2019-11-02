@@ -17,5 +17,4 @@ public class AntiBabyZombie implements Listener {
 				event.setCancelled(true);
 		}
 	}
-
 }

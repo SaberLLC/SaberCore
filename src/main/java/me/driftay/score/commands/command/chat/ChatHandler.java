@@ -1,6 +1,6 @@
 package me.driftay.score.commands.command.chat;
 
-import me.driftay.score.config.Conf;
+import me.driftay.score.utils.Util;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -14,7 +14,7 @@ public class ChatHandler {
             "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])([.,])){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$");
 
 
-    public static int delayTime = Conf.slowChatTime;
+    public static int delayTime = Util.config.getInt("slowChatTime");
     public static boolean chatMuted = false;
 
 
@@ -32,7 +32,7 @@ public class ChatHandler {
 
         String[] words = msg.trim().split(" ");
         for (String word : words) {
-            for (String filteredWord : Conf.filteredWords) {
+            for (String filteredWord : Util.config.getStringList("ChatFilter.Filtered-Words")) {
                 if (word.contains(filteredWord)) {
                     return true;
                 }
@@ -40,7 +40,7 @@ public class ChatHandler {
         }
         for (String word : message.replace("(dot)", ".").replace("[dot]", ".").trim().split(" ")) {
             boolean continueIt = false;
-            for (String phrase : Conf.whitelistedLinks) {
+            for (String phrase : Util.config.getStringList("ChatFilter.Whitelisted-Links")) {
                 if (word.toLowerCase().contains(phrase)) {
                     continueIt = true;
                     break;
@@ -58,7 +58,7 @@ public class ChatHandler {
                 return true;
             }
         }
-        Optional<String> optional = Conf.filteredPhrases.stream().filter(msg::contains).findFirst();
+        Optional<String> optional = Util.config.getStringList("ChatFilter.Filtered-Phrases").stream().filter(msg::contains).findFirst();
         return optional.isPresent();
     }
 

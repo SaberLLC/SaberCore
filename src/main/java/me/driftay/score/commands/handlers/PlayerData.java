@@ -1,6 +1,6 @@
 package me.driftay.score.commands.handlers;
 
-import me.driftay.score.config.Conf;
+import me.driftay.score.utils.Util;
 import org.apache.commons.lang.time.DurationFormatUtils;
 import org.bukkit.entity.Player;
 
@@ -48,7 +48,7 @@ public class PlayerData {
     }
 
     public void applyPearlCooldown(Player player) {
-        pearlCooldown.put(player.getUniqueId(), System.currentTimeMillis() + (Conf.enderPearlCooldown * 1000));
+        pearlCooldown.put(player.getUniqueId(), System.currentTimeMillis() + (Util.config.getInt("enderPearlCooldown") * 1000));
     }
 
     public long getPearlMillisecondsLeft(Player player) {

@@ -1,6 +1,6 @@
 package me.driftay.score.exempt;
 
-import me.driftay.score.config.Conf;
+import me.driftay.score.utils.Util;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -23,7 +23,7 @@ public class SpawnerSponge implements Listener {
         }
         Block block = e.getBlock();
         World world = block.getWorld();
-        int radius = Conf.spawnerSpongeRadius;
+        int radius = Util.config.getInt("SpawnerSponge.Radius");
         int blockX = block.getX();
         int blockY = block.getY();
         int blockZ = block.getZ();
@@ -49,7 +49,7 @@ public class SpawnerSponge implements Listener {
         }
         Player player = e.getPlayer();
         if (e.getBlock().getType() == Material.MOB_SPAWNER) {
-            for (int radius = Conf.spawnerSpongeRadius, x = -radius; x <= radius; ++x) {
+            for (int radius = Util.config.getInt("SpawnerSponge.Radius"), x = -radius; x <= radius; ++x) {
                 for (int y = -radius; y <= radius; ++y) {
                     for (int z = -radius; z <= radius; ++z) {
                         Location locIntorno = new Location(player.getWorld(), (double) (e.getBlock().getX() + x), (double) (e.getBlock().getY() + y), (double) (e.getBlock().getZ() + z));
@@ -65,7 +65,7 @@ public class SpawnerSponge implements Listener {
     @EventHandler
     public void onWaterBucket(PlayerInteractEvent playerInteractEvent) {
         if (!playerInteractEvent.isCancelled() && playerInteractEvent.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-            int i = Conf.spawnerSpongeRadius;
+            int i = Util.config.getInt("SpawnerSponge.Radius");
             Block clickedBlock = playerInteractEvent.getClickedBlock();
             World world = clickedBlock.getWorld();
             if (playerInteractEvent.getPlayer().getItemInHand().getType().equals(Material.WATER_BUCKET)) {

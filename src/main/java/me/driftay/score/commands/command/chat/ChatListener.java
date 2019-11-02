@@ -1,7 +1,6 @@
 package me.driftay.score.commands.command.chat;
 
 import me.driftay.score.SaberCore;
-import me.driftay.score.config.Conf;
 import me.driftay.score.utils.Cooldown;
 import me.driftay.score.utils.Message;
 import me.driftay.score.utils.Util;
@@ -46,7 +45,7 @@ public class ChatListener implements Listener {
     }
 
     public String formatFilteredPublicMessage(Player player, String message) {
-        return Util.color(Conf.chatFilterFormat).replace("{player}", player.getName()).replace("{message}", message);
+        return Util.color(Util.config.getString("ChatFilter.Format")).replace("{player}", player.getName()).replace("{message}", message);
     }
 
     public void messageStaff(String message) {

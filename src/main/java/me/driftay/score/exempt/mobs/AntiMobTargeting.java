@@ -1,6 +1,5 @@
 package me.driftay.score.exempt.mobs;
 
-import me.driftay.score.commands.handlers.PlayerData;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;

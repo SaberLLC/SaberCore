@@ -1,6 +1,5 @@
 package me.driftay.score.commands.handlers;
 
-import me.driftay.score.config.Conf;
 import me.driftay.score.utils.Util;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -21,11 +20,11 @@ public class HarvesterHoeListener implements Listener {
 
         if (event.getPlayer().getItemInHand().getType() != Material.DIAMOND_HOE
                 || event.getPlayer().getItemInHand() == null
-                || !event.getPlayer().getItemInHand().getItemMeta().getDisplayName().equals(Util.color(Conf.harvesterHoeDisplayName)))
+                || !event.getPlayer().getItemInHand().getItemMeta().getDisplayName().equals(Util.color(Util.config.getString("HarvesterHoe.Item.DisplayName"))))
             return;
 
 
-            if (Util.isHooked() && Conf.harvesterHoeAutoSell) {
+            if (Util.isHooked() && Util.config.getBoolean("HarvesterHoe.AutoSell")) {
                 if (event.getBlock().getType() == Material.SUGAR_CANE_BLOCK) {
                     event.setCancelled(true);
                     Location currLoc = event.getBlock().getLocation();
@@ -35,7 +34,7 @@ public class HarvesterHoeListener implements Listener {
                     currLoc = new Location(currLoc.getWorld(), currLoc.getBlockX(), currLoc.getBlockY() - 1, currLoc.getBlockZ());
                     while (currLoc.getBlockY() >= event.getBlock().getY()) {
                         currLoc.getBlock().setType(Material.AIR);
-                        Util.sell(event.getPlayer(), Conf.perCanePrice);
+                        Util.sell(event.getPlayer(), Util.config.getDouble("HarvesterHoe.SugarCanePrice"));
                         currLoc = new Location(currLoc.getWorld(), currLoc.getBlockX(), currLoc.getBlockY() - 1, currLoc.getBlockZ());
                     }
                 }

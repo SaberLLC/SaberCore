@@ -3,12 +3,13 @@ package me.driftay.score.commands.handlers;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import me.driftay.score.SaberCore;
-import me.driftay.score.config.Conf;
 import me.driftay.score.hooks.HookManager;
 import me.driftay.score.hooks.impl.FactionHook;
 import me.driftay.score.hooks.impl.WorldGuardHook;
 import me.driftay.score.utils.Message;
+import me.driftay.score.utils.Util;
 import me.driftay.score.utils.XMaterial;
+import net.coreprotect.CoreProtect;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -25,11 +26,7 @@ import java.util.HashSet;
 import static me.driftay.score.utils.Util.color;
 
 public class ChunkbusterListener implements Listener {
-    public static HashMap<Chunk, Location> beingBusted;
-
-    static {
-        ChunkbusterListener.beingBusted = new HashMap<>();
-    }
+    public static HashMap<Chunk, Location> beingBusted = new HashMap<>();
 
     private HashSet<Chunk> waterChunks = new HashSet<>();
 
@@ -40,7 +37,7 @@ public class ChunkbusterListener implements Listener {
         Block block = e.getBlock();
 
         if (e.getItemInHand().getType().equals(XMaterial.END_PORTAL_FRAME.parseMaterial())) {
-            if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(color(Conf.chunkBusterDisplayName))) {
+            if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(color(Util.config.getString("Chunkbuster.Item.DisplayName")))) {
                 Block b = e.getBlockPlaced();
 
                 if (HookManager.getPluginMap().get("WorldGuard") != null) {
@@ -85,47 +82,54 @@ public class ChunkbusterListener implements Listener {
                                     continue;
                                 }
                                 if (!block1.getType().equals(Material.BEDROCK)) {
-                                    block1.setType(XMaterial.GLASS.parseMaterial());
+                                    if(Bukkit.getPluginManager().getPlugin("CoreProtect") != null) {
+                                        CoreProtect.getInstance().getAPI().logRemoval(player.getName(), block1.getLocation(), block1.getType(), block1.getData());
+                                    }
+                                        block1.setType(XMaterial.GLASS.parseMaterial());
                                 }
                             }
                         }
                     }
                 }, 0);
-                if (Conf.chunkBusterHologram) {
-                    Hologram hologram = HologramsAPI.createHologram(SaberCore.instance, b.getLocation().add(0.5, 1.5, 0.5));
-                    hologram.appendTextLine(color(Conf.chunkBusterHologramFormat));
-                    Bukkit.getScheduler().runTaskTimer(SaberCore.instance, new Runnable() {
-                        int timer = Conf.chunkBusterWarmup;
+                if (Bukkit.getPluginManager().getPlugin("HolographicDisplays") != null) {
+                    if (Util.config.getBoolean("Chunkbuster.Hologram.Enabled")) {
+                        Hologram hologram = HologramsAPI.createHologram(SaberCore.instance, b.getLocation().add(0.5, 1.5, 0.5));
+                        hologram.appendTextLine(color(Util.config.getString("Chunkbuster.Hologram.Format")));
+                        Bukkit.getScheduler().runTaskTimer(SaberCore.instance, new Runnable() {
+                            int timer = Util.config.getInt("Chunkbuster.Warmup");
 
-                        @Override
-                        public void run() {
-                            if (timer == 0) {
-                                hologram.delete();
-                                return;
+                            @Override
+                            public void run() {
+                                if (timer == 0) {
+                                    hologram.delete();
+                                    return;
+                                }
+                                if (hologram.size() == 2) {
+                                    hologram.getLine(1).removeLine();
+                                }
+                                hologram.appendTextLine((ChatColor.DARK_RED + "" + timer));
+                                timer--;
                             }
-                            if (hologram.size() == 2) {
-                                hologram.getLine(1).removeLine();
-                            }
-                            hologram.appendTextLine((ChatColor.DARK_RED + "" + timer));
-                            timer--;
-                        }
-                    }, 0L, 20L);
+                        }, 0L, 20L);
+                    }
                 }
-                if (Conf.chunkbusterAsyncMode) {
+                if (Util.config.getBoolean("Chunkbuster.Async-Mode")) {
                     Bukkit.getScheduler().scheduleSyncDelayedTask(SaberCore.instance, () -> {
                         int multiplier = 0;
                         for (int yy = e.getBlockPlaced().getY(); yy >= 0; yy--) {
                             multiplier++;
                             int dy = yy;
                             Bukkit.getScheduler().scheduleSyncDelayedTask(SaberCore.instance, () -> {
-                                int yy1 = dy;
                                 for (int zz = bz; zz < bz + 16; zz++) {
                                     for (int xx = bx; xx < bx + 16; xx++) {
-                                        Block block12 = world.getBlockAt(xx, yy1, zz);
+                                        Block block12 = world.getBlockAt(xx, dy, zz);
                                         if (block12.getType().equals(Material.AIR) || block12.getType().equals(XMaterial.SPAWNER.parseMaterial()) || block12.getType().equals(XMaterial.CHEST.parseMaterial()) || block12.getType().equals(XMaterial.TRAPPED_CHEST.parseMaterial())) {
                                             continue;
                                         }
                                         if (!block12.getType().equals(Material.BEDROCK)) {
+                                            if(Bukkit.getPluginManager().getPlugin("CoreProtect") != null) {
+                                                CoreProtect.getInstance().getAPI().logRemoval(player.getName(), block12.getLocation(), block12.getType(), block12.getData());
+                                            }
                                             block12.setType(Material.AIR);
                                         }
                                     }
@@ -134,7 +138,7 @@ public class ChunkbusterListener implements Listener {
                             }, 20L * multiplier);
 
                         }
-                    }, Conf.chunkBusterWarmup * 20L);
+                    }, Util.config.getInt("Chunkbuster.Warmup") * 20L);
                 } else {
                     Bukkit.getScheduler().scheduleSyncDelayedTask(SaberCore.instance, () -> {
                         for (int xx = bx; xx < bx + 16; xx++) {
@@ -145,13 +149,16 @@ public class ChunkbusterListener implements Listener {
                                         continue;
                                     }
                                     if (!block13.getType().equals(Material.BEDROCK)) {
+                                        if(Bukkit.getPluginManager().getPlugin("CoreProtect") != null) {
+                                            CoreProtect.getInstance().getAPI().logRemoval(player.getName(), block13.getLocation(), block13.getType(), block13.getData());
+                                        }
                                         block13.setType(Material.AIR);
                                     }
                                 }
                                 beingBusted.remove(e.getBlock().getChunk());
                             }
                         }
-                    }, Conf.chunkBusterWarmup * 20L);
+                    }, Util.config.getInt("Chunkbuster.Warmup") * 20L);
                 }
             }
         }

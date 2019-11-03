@@ -1,6 +1,6 @@
 package me.driftay.score.exempt;
 
-import me.driftay.score.config.Conf;
+import me.driftay.score.utils.Util;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -10,7 +10,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
+import java.util.List;
+
 public class AntiDestroy implements Listener {
+
+    private List<String> lightningDeny = Util.config.getStringList("Lightning-Deny");
+    private List<String> explosionDeny = Util.config.getStringList("Explosion-Deny");
+    private List<String> lavaBurnDeny = Util.config.getStringList("Burn-Deny");
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
     private void onEntityDamage(EntityDamageByEntityEvent e) {
@@ -21,7 +27,7 @@ public class AntiDestroy implements Listener {
             return;
         }
         Material type = ((Item) e.getEntity()).getItemStack().getType();
-        if (!Conf.lightningDeny.contains(type.name())) {
+        if (!lightningDeny.contains(type.name())) {
             return;
         }
         e.setCancelled(true);
@@ -39,7 +45,7 @@ public class AntiDestroy implements Listener {
             return;
         }
         Material type = ((Item) e.getEntity()).getItemStack().getType();
-        if (!Conf.lavaBurnDeny.contains(type.name())) {
+        if (!lavaBurnDeny.contains(type.name())) {
             return;
         }
         e.setCancelled(true);
@@ -57,7 +63,7 @@ public class AntiDestroy implements Listener {
             return;
         }
         Material type = ((Item) e.getEntity()).getItemStack().getType();
-        if (!Conf.explosionDeny.contains(type.name())) {
+        if (!explosionDeny.contains(type.name())) {
             return;
         }
         e.setCancelled(true);

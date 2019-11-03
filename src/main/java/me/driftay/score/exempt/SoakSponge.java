@@ -13,9 +13,7 @@ import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-@SuppressWarnings("Duplicates")
-public class SpawnerSponge implements Listener {
-
+public class SoakSponge implements Listener {
     @EventHandler
     public void on(BlockFromToEvent e) {
         if (e.isCancelled()) {
@@ -31,7 +29,7 @@ public class SpawnerSponge implements Listener {
             for (int fromY = -(radius + 1); fromY <= radius + 1; ++fromY) {
                 for (int fromZ = -(radius + 1); fromZ <= radius + 1; ++fromZ) {
                     Block b = world.getBlockAt(blockX + fromX, blockY + fromY, blockZ + fromZ);
-                    if (b.getType().equals(Material.MOB_SPAWNER)) {
+                    if (b.getType().equals(Material.SPONGE)) {
                         if (e.isCancelled()) {
                             return;
                         }
@@ -48,7 +46,7 @@ public class SpawnerSponge implements Listener {
             return;
         }
         Player player = e.getPlayer();
-        if (e.getBlock().getType() == Material.MOB_SPAWNER) {
+        if (e.getBlock().getType() == Material.SPONGE) {
             for (int radius = Util.config.getInt("SpawnerSponge.Radius"), x = -radius; x <= radius; ++x) {
                 for (int y = -radius; y <= radius; ++y) {
                     for (int z = -radius; z <= radius; ++z) {
@@ -86,6 +84,6 @@ public class SpawnerSponge implements Listener {
     }
 
     private boolean isSpawner(Material material) {
-        return material.equals(Material.MOB_SPAWNER);
+        return material.equals(Material.SPONGE);
     }
 }

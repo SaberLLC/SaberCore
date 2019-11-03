@@ -1,13 +1,18 @@
 package me.driftay.score;
 
-import me.driftay.score.commands.*;
+import me.driftay.score.commands.command.*;
+import me.driftay.score.commands.command.chat.CmdMuteChat;
+import me.driftay.score.commands.command.chat.CmdSlowChat;
 import me.driftay.score.commands.handlers.ChunkbusterListener;
 import me.driftay.score.commands.handlers.HarvesterHoeListener;
-import me.driftay.score.config.Conf;
+import me.driftay.score.commands.handlers.ShockwaveListener;
 import me.driftay.score.config.Persist;
 import me.driftay.score.exempt.*;
+import me.driftay.score.exempt.mobs.*;
 import me.driftay.score.file.CustomFile;
 import me.driftay.score.file.impl.MessageFile;
+import me.driftay.score.commands.command.chat.ChatHandler;
+import me.driftay.score.commands.command.chat.ChatListener;
 import me.driftay.score.hooks.HookManager;
 import me.driftay.score.hooks.PluginHook;
 import me.driftay.score.hooks.impl.FactionHook;
@@ -29,6 +34,9 @@ public final class SaberCore extends JavaPlugin {
     public static SaberCore instance;
     private static Logger logger;
     private Persist persist;
+    public List<String> itemList = getConfig().getStringList("DeniedItemStorage.Items");
+    private ChatHandler chatHandler;
+
 
     public static void log(String message) {
         logger.log(Level.INFO, message);
@@ -47,11 +55,15 @@ public final class SaberCore extends JavaPlugin {
     public void onEnable() {
         instance = this;
         logger = this.getLogger();
+        saveDefaultConfig();
+        getConfig().options().copyDefaults(true);
+        System.out.println(startUpString());
         registerListeners();
+        getServer().getPluginManager().registerEvents(new ChatListener(), this);
         registerBooleans();
         persist = new Persist();
         getDataFolder().mkdirs();
-        Conf.load();
+        this.chatHandler = new ChatHandler();
         Collections.singletonList(new MessageFile()).forEach(CustomFile::init);
         registerCommands();
         Util.register();
@@ -64,7 +76,7 @@ public final class SaberCore extends JavaPlugin {
     }
 
     public void onDisable() {
-        Conf.save();
+        instance = null;
     }
 
     private void registerListeners() {
@@ -86,73 +98,111 @@ public final class SaberCore extends JavaPlugin {
         getCommand("sabercore").setExecutor(new CmdReload());
         getCommand("ping").setExecutor(new CmdPing());
         getCommand("setslots").setExecutor(new CmdSetSlots(this));
+        getCommand("playerinfo").setExecutor(new CmdPlayerInfo());
+        getCommand("mutechat").setExecutor(new CmdMuteChat());
+        getCommand("slowchat").setExecutor(new CmdSlowChat());
     }
 
 
     private void registerBooleans() {
-        if(Conf.useOreTracker){
+        if(getConfig().getBoolean("denyIronGolemsTargetZombies")){
+            getServer().getPluginManager().registerEvents(new IronGolemAI(), this);
+        }
+
+        if(getConfig().getBoolean("Shockwave.Enabled")){
+            getServer().getPluginManager().registerEvents(new ShockwaveListener(), this);
+            getCommand("shockwave").setExecutor(new CmdShockwave());
+        }
+
+        if(getConfig().getBoolean("useOreTracker")){
             getServer().getPluginManager().registerEvents(new OreTracker(), this);
         }
-        if(Conf.instaBreakSponges){
+        if(getConfig().getBoolean("instaSpongeBreak")){
             getServer().getPluginManager().registerEvents(new InstaBreakSponge(), this);
         }
-        if(Conf.denyPistonGlitching){
+        if(getConfig().getBoolean("denyPistonFarming")){
             getServer().getPluginManager().registerEvents(new PistonGlitching(), this);
         }
-        if(Conf.denyBlazeWaterDamage){
+        if(getConfig().getBoolean("denyBlazeWaterDamage")){
             getServer().getPluginManager().registerEvents(new WaterProofBlazes(), this);
         }
-        if(Conf.denyWeatherChanging){
-            getServer().getPluginManager().registerEvents(new WeatherChange(), this);
-        }
-        if(Conf.denyNaturalMobSpawning){
+        if(getConfig().getBoolean("denyNaturalMobSpawning")){
             getServer().getPluginManager().registerEvents(new NaturalMobSpawning(), this);
         }
-        if(Conf.useHarvesterHoes){
+        if(getConfig().getBoolean("HarvesterHoe.Enabled")){
             getServer().getPluginManager().registerEvents(new HarvesterHoeListener(), this);
             getCommand("harvesterhoe").setExecutor(new CmdHarvesterHoe());
         }
-        if(Conf.useChunkBusters){
+        if(getConfig().getBoolean("Chunkbuster.Enabled")){
             getServer().getPluginManager().registerEvents(new ChunkbusterListener(), this);
             getCommand("chunkbuster").setExecutor(new CmdChunkbuster());
         }
-        if(Conf.cancelDragonEggTeleport){
+        if(getConfig().getBoolean("cancelDragonEggTeleport")){
             getServer().getPluginManager().registerEvents(new DragonEggAntiTP(), this);
         }
-        if(Conf.useAntiDestroySystem){
+        if(getConfig().getBoolean("useAntiDestroySystem")){
             getServer().getPluginManager().registerEvents(new AntiDestroy(), this);
         }
-        if(Conf.useAutoRespawn){
+        if(getConfig().getBoolean("useAutoRespawn")){
             getServer().getPluginManager().registerEvents(new AutoRespawn(), this);
         }
-        if (Conf.useAntiCobbleMonster) {
+        if (getConfig().getBoolean("useAntiCobbleMonster")) {
             getServer().getPluginManager().registerEvents(new AntiCobbleMonster(), this);
         }
-        if (Conf.useAntiWildernessSpawner) {
+        if (getConfig().getBoolean("useAntiWildernessSpawner")) {
             getServer().getPluginManager().registerEvents(new AntiWildernessSpawner(), this);
         }
-        if (Conf.useDisabledCommands) {
+        if (getConfig().getBoolean("DisabledCommands.Enabled")) {
             getServer().getPluginManager().registerEvents(new DisabledCommands(), this);
         }
-        if (Conf.useAntiBoatPlacement) {
+        if (getConfig().getBoolean("useAntiBoatPlacement")) {
             getServer().getPluginManager().registerEvents(new BoatListener(), this);
         }
-        if (Conf.useSpawnerSponge) {
+        if (getConfig().getBoolean("SpawnerSponge.Enabled")) {
             getServer().getPluginManager().registerEvents(new SpawnerSponge(), this);
+            getServer().getPluginManager().registerEvents(new SoakSponge(), this);
         }
-        if (Conf.useRegionListener) {
-            getServer().getPluginManager().registerEvents(new RegionListener(), this);
-        }
-        if (Conf.useBookDisenchant) {
+        if (getConfig().getBoolean("useBookDisenchant")) {
             getServer().getPluginManager().registerEvents(new BookDisenchant(), this);
         }
-        if(Conf.useAntiSpawnerMine){
+        if(getConfig().getBoolean("AntiSpawnerMine.Enabled")){
             getServer().getPluginManager().registerEvents(new SpawnerMine(), this);
         }
-        if(Conf.useStatTrackSword){
+        if(getConfig().getBoolean("StatTrack-Swords.Enabled")){
             getServer().getPluginManager().registerEvents(new StatTrackSwords(), this);
         }
+        if(getConfig().getBoolean("useAntiMobTargeting")){
+            getServer().getPluginManager().registerEvents(new AntiMobTargeting(), this);
+        }
+        if(getConfig().getBoolean("useAntiMobAI")){
+            getServer().getPluginManager().registerEvents(new AntiMobMoving(), this);
+        }
+        if(getConfig().getBoolean("denyExplosionDamage")){
+            getServer().getPluginManager().registerEvents(new DenyExplosionDamage(), this);
+        }
+        if(getConfig().getBoolean("reduceIronGolemHealth")){
+            getServer().getPluginManager().registerEvents(new IronGolemHealth(), this);
+        }
+        if(getConfig().getBoolean("useAntiZombieBaby")){
+            getServer().getPluginManager().registerEvents(new AntiBabyZombie(), this);
+        }
     }
+    public ChatHandler getChatHandler() { return chatHandler; }
+
+    private static String startUpString(){
+        return "\n" +
+                "  ██████  ▄▄▄       ▄▄▄▄   ▓█████  ██▀███   ▄████▄   ▒█████   ██▀███  ▓█████ \n" +
+                "▒██    ▒ ▒████▄    ▓█████▄ ▓█   ▀ ▓██ ▒ ██▒▒██▀ ▀█  ▒██▒  ██▒▓██ ▒ ██▒▓█   ▀ \n" +
+                "░ ▓██▄   ▒██  ▀█▄  ▒██▒ ▄██▒███   ▓██ ░▄█ ▒▒▓█    ▄ ▒██░  ██▒▓██ ░▄█ ▒▒███   \n" +
+                "  ▒   ██▒░██▄▄▄▄██ ▒██░█▀  ▒▓█  ▄ ▒██▀▀█▄  ▒▓▓▄ ▄██▒▒██   ██░▒██▀▀█▄  ▒▓█  ▄ \n" +
+                "▒██████▒▒ ▓█   ▓██▒░▓█  ▀█▓░▒████▒░██▓ ▒██▒▒ ▓███▀ ░░ ████▓▒░░██▓ ▒██▒░▒████▒\n" +
+                "▒ ▒▓▒ ▒ ░ ▒▒   ▓▒█░░▒▓███▀▒░░ ▒░ ░░ ▒▓ ░▒▓░░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒▓ ░▒▓░░░ ▒░ ░\n" +
+                "░ ░▒  ░ ░  ▒   ▒▒ ░▒░▒   ░  ░ ░  ░  ░▒ ░ ▒░  ░  ▒     ░ ▒ ▒░   ░▒ ░ ▒░ ░ ░  ░\n" +
+                "░  ░  ░    ░   ▒    ░    ░    ░     ░░   ░ ░        ░ ░ ░ ▒    ░░   ░    ░   \n" +
+                "      ░        ░  ░ ░         ░  ░   ░     ░ ░          ░ ░     ░        ░  ░\n" +
+                "                         ░                 ░                                 \n";
+    }
+
     public Persist getPersist() {
         return persist;
     }

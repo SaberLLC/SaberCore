@@ -6,7 +6,7 @@
 
     <groupId>groupId</groupId>
     <artifactId>SaberCore</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>3.0-SNAPSHOT</version>
 
 
     <repositories>
@@ -26,6 +26,14 @@
             <id>essx-repo</id>
             <url>https://ci.ender.zone/plugin/repository/everything/</url>
         </repository>
+        <repository>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.org/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>bungeecord-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -39,6 +47,7 @@
             <groupId>com.github.Driftay</groupId>
             <artifactId>Saber-Factions</artifactId>
             <version>1.4.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -50,6 +59,18 @@
             <artifactId>holographicdisplays-api</artifactId>
             <version>2.3.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codemc.worldguardwrapper</groupId>
+            <artifactId>worldguardwrapper</artifactId>
+            <version>1.1.6-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>me.fanciful</groupId>
+            <artifactId>fanciful</artifactId>
+            <version>0.4.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/dependencies/fanciful-0.3.5.1.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>
@@ -80,6 +101,13 @@
             <systemPath>${project.basedir}/dependencies/Factions.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>com.coreprotect</groupId>
+            <artifactId>coreprotect</artifactId>
+            <scope>system</scope>
+            <version>2.0</version>
+            <systemPath>${project.basedir}/dependencies/CoreProtect_2.12.0.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>VaultAPI</artifactId>
             <version>1.6</version>
@@ -93,16 +121,52 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <build>
+        <defaultGoal>clean package</defaultGoal>
+        <finalName>SaberCore</finalName>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.7.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <relocations>
+                                <relocation>
+                                    <pattern>mkremins.fanciful</pattern>
+                                    <shadedPattern>me.driftay.score.shaded.fanciful</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 </project>

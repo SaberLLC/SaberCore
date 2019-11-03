@@ -1,6 +1,6 @@
-package me.driftay.score.commands;
+package me.driftay.score.commands.command;
 
-import me.driftay.score.config.Conf;
+import me.driftay.score.SaberCore;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,7 +15,7 @@ public class CmdReload implements CommandExecutor {
             if (!sender.hasPermission("sabercore.reload")) return true;
             if (args[0].equalsIgnoreCase("reload")) {
                 sender.sendMessage(color("&c(!) Reloading Configs..."));
-                Conf.load();
+                SaberCore.instance.reloadConfig();
                 sender.sendMessage(color("&c(!) Configs Reloaded!"));
                 sender.sendMessage(color("&c(!)Reload Complete!"));
                 return true;

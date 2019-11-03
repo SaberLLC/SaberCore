@@ -81,7 +81,7 @@ public class OreTracker implements Listener {
         }else{
             try{
                 ChatColor color = ORES.get(type).asList().get(0);
-                Integer count = Integer.valueOf(ChatColor.stripColor(lore.get(index)).split(" ")[4]) + 1;
+                int count = Integer.valueOf(ChatColor.stripColor(lore.get(index)).split(" ")[4]) + 1;
                 lore.set(index, color + "This pickaxe has mined " + ChatColor.BOLD + color + count + ' ' + type.name()
                         .toLowerCase().replace("_", " "));
             }catch(Exception ignored){

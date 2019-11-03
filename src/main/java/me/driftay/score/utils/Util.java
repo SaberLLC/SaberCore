@@ -6,8 +6,11 @@ import me.driftay.score.SaberCore;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -22,6 +25,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.logging.Level;
 
 public class Util {
     public static Economy economy;
@@ -32,7 +36,7 @@ public class Util {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
 
-    public static List<String> colorList(List<String> string) {
+    public static List<String> color(List<String> string) {
         List<String> colored = new ArrayList<>();
         for (String line : string) {
             colored.add(color(line));
@@ -84,6 +88,42 @@ public class Util {
             e.printStackTrace();
         }
         return (ImmutableSet.copyOf(classes));
+    }
+
+    public static ItemStack createItem(Material material, int amount, short datavalue, String name, List<String> lore) {
+        ItemStack item = new ItemStack(material, amount, datavalue);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(color(name));
+        meta.setLore(color(lore));
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    public static String convertItemToJson(ItemStack item) {
+        Class<?> craftItemStackClazz = ReflectionUtils.getOBCClass("inventory.CraftItemStack");
+        Method asNMSCopyMethod = ReflectionUtils.getMethod(craftItemStackClazz, "asNMSCopy", ItemStack.class);
+
+        Class<?> nmsItemStackClazz = ReflectionUtils.getNMSClass("ItemStack");
+        Class<?> nbtTagCompoundClazz = ReflectionUtils.getNMSClass("NBTTagCompound");
+        Method saveNmsItemStackMethod = ReflectionUtils.getMethod(nmsItemStackClazz, "save", nbtTagCompoundClazz);
+
+        Object nmsNbtTagCompoundObj;
+        Object nmsItemStackObj;
+        Object itemAsJsonObject;
+
+        try {
+            nmsNbtTagCompoundObj = nbtTagCompoundClazz.newInstance();
+            assert asNMSCopyMethod != null;
+            nmsItemStackObj = asNMSCopyMethod.invoke(null, item);
+            assert saveNmsItemStackMethod != null;
+            itemAsJsonObject = saveNmsItemStackMethod.invoke(nmsItemStackObj, nmsNbtTagCompoundObj);
+        } catch (Throwable t) {
+            Bukkit.getLogger().log(Level.SEVERE, "Failed to serialize itemstack to nms item", t);
+            return null;
+        }
+
+        // Return a string representation of the serialized object
+        return itemAsJsonObject.toString();
     }
 
     public static WorldGuardPlugin getWorldGuard() {

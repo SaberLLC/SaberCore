@@ -81,8 +81,8 @@ HarvesterHoe:
 Shockwave:
   Enabled: true #Enable or Disable Shockwaves
   Log-Core-Protect: false #REQUIRES CORE PROTECT TO BE INSTALLED!
-  Efficiency: 5
-  Unbreaking: 3
+  Efficiency-Level: 5
+  Unbreaking-Level: 3
   Item:
     DisplayName: '&c&lShockwave Tool'
     Lore:

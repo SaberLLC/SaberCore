@@ -17,6 +17,10 @@ public enum Message {
     MUTE_CHAT_TOGGLED("mute-chat.toggled", "&ePublic Chat has been &d{context} &eby {player}"),
     ANTI_SPAWNER_MINE_PLAYERS_NEAR("anti-spawner-mine-players-near", "&c&l[!] &7You may not break spawners while enemies are near!"),
 
+    GIVE_ALL_INVALID_ITEM("give-all.item-invalid", "&c&l[!] &7You can't give air to everyone xD"),
+    GIVE_ALL_RECEIVED("give-all.received", "&2&l[!] &7Everyone on the server has been gifted &b{item}&7!"),
+    GIVE_ALL_EXECUTED("give-all.executed", "&2&l[!] &7You have given everyone on the server &b{item}&7!"),
+
     ENDERPEARL_ON_COOLDOWN("enderpearl-on-cooldown", "&c&l[!] &7You cannot use another enderpearl for &b%time%&7!"),
     ANVIL_OPENED("anvil-open", "&c&l[!] &7Opening anvil..."),
 

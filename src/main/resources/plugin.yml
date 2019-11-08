@@ -5,6 +5,8 @@ author: Driftay
 commands:
   slowchat:
     description: base command for slowchat
+  giveall:
+    description: give all players on the server an item your holding
   mutechat:
     description: base command for mutechat
   sabercore:
@@ -38,6 +40,8 @@ commands:
   recycle:
     description: base command for recycling bottles
 permissions:
+  sabercore.giveall:
+    description: Allows players to execute /giveall
   sabercore.staff:
     description: Allows players to use general staff commands in sabercore
   sabercore.reload:

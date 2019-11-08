@@ -101,6 +101,7 @@ public final class SaberCore extends JavaPlugin {
         getCommand("playerinfo").setExecutor(new CmdPlayerInfo());
         getCommand("mutechat").setExecutor(new CmdMuteChat());
         getCommand("slowchat").setExecutor(new CmdSlowChat());
+        getCommand("giveall").setExecutor(new CmdGiveAll());
     }
 
 

@@ -34,6 +34,14 @@
             <id>bungeecord-repo</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
+        <repository>
+            <id>coreprotect-repo</id>
+            <url>http://maven.playpro.com/</url>
+        </repository>
+        <repository>
+            <id>sk89q-repo</id>
+            <url>http://maven.sk89q.com/repo/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -61,30 +69,62 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.codemc.worldguardwrapper</groupId>
-            <artifactId>worldguardwrapper</artifactId>
-            <version>1.1.6-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>me.fanciful</groupId>
+            <groupId>mkremins</groupId>
             <artifactId>fanciful</artifactId>
-            <version>0.4.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/fanciful-0.3.5.1.jar</systemPath>
+            <version>0.3.5.1</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>
             <artifactId>worldguard-legacy</artifactId>
-            <version>6.2.2</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/worldguard-bukkit-6.2.2.jar</systemPath>
+            <version>6.2</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
-            <artifactId>worldedit-legacy</artifactId>
-            <version>6.2.2</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/worldedit-bukkit-6.1.jar</systemPath>
+            <artifactId>worldedit-bukkit</artifactId>
+            <version>6.1.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sk89q.worldedit</groupId>
+            <artifactId>worldedit-core</artifactId>
+            <version>6.1.4-SNAPSHOT</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>de.schlichtherle</groupId>
+                    <artifactId>truezip</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>rhino</groupId>
+                    <artifactId>js</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.thoughtworks.paranamer</groupId>
+                    <artifactId>paranamer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sk89q.lib</groupId>
+                    <artifactId>jlibnoise</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sk89q</groupId>
+                    <artifactId>jchronic</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
@@ -101,11 +141,10 @@
             <systemPath>${project.basedir}/dependencies/Factions.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.coreprotect</groupId>
+            <groupId>net.coreprotect</groupId>
             <artifactId>coreprotect</artifactId>
-            <scope>system</scope>
-            <version>2.0</version>
-            <systemPath>${project.basedir}/dependencies/CoreProtect_2.12.0.jar</systemPath>
+            <version>2.16.3</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>

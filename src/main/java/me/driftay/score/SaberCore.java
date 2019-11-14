@@ -102,10 +102,13 @@ public final class SaberCore extends JavaPlugin {
         getCommand("mutechat").setExecutor(new CmdMuteChat());
         getCommand("slowchat").setExecutor(new CmdSlowChat());
         getCommand("giveall").setExecutor(new CmdGiveAll());
+        getCommand("stackpots").setExecutor(new CmdStackPotions());
     }
 
 
     private void registerBooleans() {
+        getServer().getPluginManager().registerEvents(new CmdStackPotions(), this);
+
         if(getConfig().getBoolean("denyIronGolemsTargetZombies")){
             getServer().getPluginManager().registerEvents(new IronGolemAI(), this);
         }

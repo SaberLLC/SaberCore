@@ -54,6 +54,8 @@ permissions:
     description: Allows access to give chunkbusters to players
   sabercore.harvesterhoe.give:
     description: Allows access to give harvester hoes to players
+  sabercore.potstack:
+    description: Allows access to /stackpots
   sabercore.anvil:
     description: Allows access to /anvil
   sabercore.jellylegs:

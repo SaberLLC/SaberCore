@@ -23,6 +23,7 @@ public class CmdAnvil implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+        player.closeInventory();
         player.openInventory(Bukkit.createInventory(null, InventoryType.ANVIL));
         player.sendMessage(Message.ANVIL_OPENED.getMessage());
         return false;

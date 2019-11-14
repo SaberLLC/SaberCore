@@ -16,6 +16,7 @@ public enum Message {
     SLOW_CHAT_BROADCAST("slowchat.broadcast", "&cPublic chat has been slowed"),
     MUTE_CHAT_TOGGLED("mute-chat.toggled", "&ePublic Chat has been &d{context} &eby {player}"),
     ANTI_SPAWNER_MINE_PLAYERS_NEAR("anti-spawner-mine-players-near", "&c&l[!] &7You may not break spawners while enemies are near!"),
+    POTS_STACKED("pots.stacked", "&2&l[!] &7All of the potions in your inventory have been stacked!"),
 
     GIVE_ALL_INVALID_ITEM("give-all.item-invalid", "&c&l[!] &7You can't give air to everyone xD"),
     GIVE_ALL_RECEIVED("give-all.received", "&2&l[!] &7Everyone on the server has been gifted &b{item}&7!"),

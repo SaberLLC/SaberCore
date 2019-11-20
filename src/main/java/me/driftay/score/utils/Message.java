@@ -7,8 +7,18 @@ public enum Message {
     NO_PERMISSION("no-permission", "&c&l[!] &7You do not have permission."),
     NOT_PLAYER("must-be-player", "&c&l[!] &7You must be a player to use this command!"),
     PLAYER_NOT_FOUND("player-not-found", "&c&l[!] &b%player% &7is not online!"),
+    INVALID_NUMBER("invalid-number", "&c&l[!] You need to specify a amount as an integer, this is the durability"),
 
     DISABLED_COMMAND_MESSAGE("disabled-commands-message", "&c&l[!] &4You are not permitted to use &c&l&n%command%"),
+
+    WAND_RECIEVED("Wand.received", "&2&l[!] &7You have received a &b{wand} &7wand!"),
+    WAND_NOT_USED("Wand.not-used", "&cWand not used, nothing happened"),
+    WAND_WAND_BLOCK_NOT_USABLE("Wand.block-not-usable", "&c&l[!] &7You may not use this wand on this block!"),
+    WAND_CANNOT_USE_HERE("Wand.cannot-use-here", "&c&l[!] &7You may not use this wand here!"),
+    WAND_CRAFTED_ITEMS("Wand.crafted-items", "&2&l[!] &7Crafted &b{amount} &7amount of items in chest!"),
+    WAND_CHEST_EMPTY("Wand.chest-empty", "&c&l[!] &7That Chest is empty, therefore nothing happened"),
+    WAND_USAGE("Wand.useage", "&c&l[!] &7Try using &b/saberwand give <player> lightning/craft/smelt/sand <uses>"),
+    WAND_RECIEVED_NO_SPACE("Wand.received-no-space", "&c&l[!] &7You have no space in your inventory, item dropped on floor"),
 
     PING_YOURSELF("ping-yourself", "&c&l[!] &7Your ping is &b%ping%ms&7."),
     PING_OTHER("ping-other", "&c&l[!] &b%player%'s &7ping is &b%ping%&7."),

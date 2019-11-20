@@ -169,7 +169,7 @@ public class DeathListener implements Listener {
         for(String str : s) {
             if(str.contains("%weapon%")) {
                 fm.then(" " + itemName)
-                        .itemTooltip(weapon);
+                        .tooltip(weapon.toString());
             } else {
                 fm.then(" " + str);
             }

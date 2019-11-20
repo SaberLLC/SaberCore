@@ -9,6 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
@@ -46,6 +47,25 @@ public class Util {
 
     public static void sendConsole(String command) {
         Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), command);
+    }
+
+    public static boolean isEmpty(Inventory inventory) {
+        for (ItemStack it : inventory.getContents()) {
+            if (it != null) return false;
+        }
+        return true;
+    }
+
+    public static List<String> colorWithPlaceholders(List<String> string, Placeholder... placeholders) {
+        List<String> colored = new ArrayList<>();
+        for (String line : string) {
+            String coloredLine = color(line);
+            for (Placeholder placeholder : placeholders) {
+                coloredLine = coloredLine.replace(placeholder.getKey(), placeholder.getValue());
+            }
+            colored.add(coloredLine);
+        }
+        return colored;
     }
 
     public static Collection<Class<?>> getClassesInPackage(Plugin plugin, String packageName) {

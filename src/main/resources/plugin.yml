@@ -3,6 +3,10 @@ version: ${project.version}
 main: me.driftay.score.SaberCore
 author: Driftay
 commands:
+  stackpots:
+    description: Base command for stacking potions
+  saberwand:
+    description: Base command for giving wands
   slowchat:
     description: base command for slowchat
   giveall:

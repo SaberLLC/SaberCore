@@ -6,6 +6,7 @@ import me.driftay.score.commands.command.chat.CmdSlowChat;
 import me.driftay.score.commands.handlers.ChunkbusterListener;
 import me.driftay.score.commands.handlers.HarvesterHoeListener;
 import me.driftay.score.commands.handlers.ShockwaveListener;
+import me.driftay.score.commands.handlers.WandHandler;
 import me.driftay.score.config.Persist;
 import me.driftay.score.exempt.*;
 import me.driftay.score.exempt.mobs.*;
@@ -90,6 +91,7 @@ public final class SaberCore extends JavaPlugin {
     }
 
     private void registerCommands() {
+        getCommand("saberwand").setExecutor(new CmdGiveWand());
         getCommand("lff").setExecutor(new CmdLFF());
         getCommand("jellylegs").setExecutor(new CmdJellyLegs());
         getCommand("anvil").setExecutor(new CmdAnvil());
@@ -107,6 +109,7 @@ public final class SaberCore extends JavaPlugin {
 
 
     private void registerBooleans() {
+        getServer().getPluginManager().registerEvents(new WandHandler(), this);
         getServer().getPluginManager().registerEvents(new CmdStackPotions(), this);
 
         if(getConfig().getBoolean("denyIronGolemsTargetZombies")){

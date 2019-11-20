@@ -66,11 +66,9 @@
             <version>1.1.6-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>me.fanciful</groupId>
+            <groupId>mkremins</groupId>
             <artifactId>fanciful</artifactId>
-            <version>0.4.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/fanciful-0.3.5.1.jar</systemPath>
+            <version>0.4.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>

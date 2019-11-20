@@ -45,7 +45,6 @@ public class CmdStackPotions implements CommandExecutor, Listener {
                 } else {
                     pots.put(item.getDurability(), pots.get(item.getDurability()) + item.getAmount());
                 }
-
                 player.getInventory().removeItem(item);
             }
         }

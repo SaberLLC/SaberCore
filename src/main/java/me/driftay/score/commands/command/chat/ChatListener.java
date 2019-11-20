@@ -1,5 +1,8 @@
 package me.driftay.score.commands.command.chat;
 
+import com.massivecraft.factions.FPlayer;
+import com.massivecraft.factions.FPlayers;
+import com.massivecraft.factions.struct.ChatMode;
 import me.driftay.score.SaberCore;
 import me.driftay.score.utils.Cooldown;
 import me.driftay.score.utils.Message;
@@ -16,6 +19,8 @@ public class ChatListener implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
         Player player = e.getPlayer();
+        FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
+
 
         if (ChatHandler.chatMuted && !player.hasPermission("sabercore.staff")) {
             player.sendMessage(ChatColor.RED + "Public chat is currently muted.");
@@ -25,6 +30,10 @@ public class ChatListener implements Listener {
 
         int timeLeft = Cooldown.getTimeLeft(player.getUniqueId(), "slowchat");
         if (!player.hasPermission("sabercore.chatdelay.bypass")) {
+            if(fPlayer.getChatMode() == ChatMode.ALLIANCE
+                    || fPlayer.getChatMode() == ChatMode.FACTION
+                    || fPlayer.getChatMode() == ChatMode.MOD
+                    || fPlayer.getChatMode() == ChatMode.TRUCE) return;
             if (Cooldown.isInCooldown(player.getUniqueId(), "slowchat")) {
                 player.sendMessage(Message.SLOW_CHAT_COOLDOWN.getMessage().replace("{time}", String.valueOf(timeLeft)));
                 e.setCancelled(true);

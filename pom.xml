@@ -6,7 +6,7 @@
 
     <groupId>groupId</groupId>
     <artifactId>SaberCore</artifactId>
-    <version>3.0-SNAPSHOT</version>
+    <version>4.0.0-BETA</version>
 
 
     <repositories>

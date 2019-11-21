@@ -1,6 +1,7 @@
 package me.driftay.score.commands.handlers.wands;
 
-import com.massivecraft.factions.zcore.nbtapi.NBTItem;
+
+import itemnbtapi.NBTItem;
 import me.driftay.score.utils.*;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;

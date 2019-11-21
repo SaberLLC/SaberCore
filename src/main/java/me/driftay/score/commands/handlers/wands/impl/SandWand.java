@@ -52,6 +52,8 @@ public class SandWand extends Wand {
     public void run() {
         if (!sandWandItemsToRemove.contains(block.getType().toString())) {
             player.sendMessage(Message.WAND_WAND_BLOCK_NOT_USABLE.getMessage());
+            wandUsed = false;
+            updateWand();
             return;
         }
         ArrayList<Block> validBlocks = new ArrayList<>();

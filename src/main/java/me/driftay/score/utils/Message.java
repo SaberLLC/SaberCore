@@ -1,7 +1,5 @@
 package me.driftay.score.utils;
 
-import org.bukkit.ChatColor;
-
 public enum Message {
 
     NO_PERMISSION("no-permission", "&c&l[!] &7You do not have permission."),
@@ -13,6 +11,7 @@ public enum Message {
 
     WAND_RECIEVED("Wand.received", "&2&l[!] &7You have received a &b{wand} &7wand!"),
     WAND_NOT_USED("Wand.not-used", "&cWand not used, nothing happened"),
+    WAND_SMELTED_ITEMS("Wand.smelted-items", "&2&l[!] &7Smelted {amount} &7items in the chest!"),
     WAND_WAND_BLOCK_NOT_USABLE("Wand.block-not-usable", "&c&l[!] &7You may not use this wand on this block!"),
     WAND_CANNOT_USE_HERE("Wand.cannot-use-here", "&c&l[!] &7You may not use this wand here!"),
     WAND_CRAFTED_ITEMS("Wand.crafted-items", "&2&l[!] &7Crafted &b{amount} &7amount of items in chest!"),
@@ -109,7 +108,7 @@ public enum Message {
 
     Message(String config, String message) {
         this.config = config;
-        this.message = ChatColor.translateAlternateColorCodes('&', message);
+        this.message = Util.color(message);
     }
 
     public String getConfig() {

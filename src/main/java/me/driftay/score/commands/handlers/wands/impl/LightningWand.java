@@ -6,6 +6,8 @@ import me.driftay.score.utils.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class LightningWand extends Wand {
 
     private Entity entity;

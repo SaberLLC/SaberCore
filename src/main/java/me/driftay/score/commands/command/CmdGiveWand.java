@@ -3,6 +3,7 @@ package me.driftay.score.commands.command;
 import me.driftay.score.commands.handlers.wands.impl.CraftWand;
 import me.driftay.score.commands.handlers.wands.impl.LightningWand;
 import me.driftay.score.commands.handlers.wands.impl.SandWand;
+import me.driftay.score.commands.handlers.wands.impl.SmeltWand;
 import me.driftay.score.utils.ItemCreation;
 import me.driftay.score.utils.Message;
 import org.bukkit.Bukkit;
@@ -57,7 +58,7 @@ public class CmdGiveWand implements CommandExecutor {
                         wand = SandWand.buildItem(durability);
                         break;
                     case "smelt":
-                        wand = ItemCreation.createSmeltWandItem(durability);
+                        wand = SmeltWand.buildItem(durability);
                         break;
                     case "craft":
                         wand = CraftWand.buildItem(durability);

@@ -6,6 +6,9 @@ commands:
   stackpots:
     description: Base command for stacking potions
   saberwand:
+    aliases:
+      - wand
+      - wands
     description: Base command for giving wands
   slowchat:
     description: base command for slowchat

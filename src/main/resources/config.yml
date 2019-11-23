@@ -53,10 +53,13 @@ Chunkbuster:
     Enabled: true #Requires Holographic Displays
     Format: '&c&l[!] &7ChunkBuster' #Hologram Format for Chunkbuster When Placed
   Item:
-    DisplayName: '&cChunkBuster'
+    DisplayName: '&c&lChunkBuster'
     Lore:
-      - '&7A &cpowerful &7piece of &calien tech'
-      - '&7Destroys the chunk it is placed in!'
+      - '&f'
+      - '&7&o(( Tip: Placing this &c&ochunkbuster&7&o will &a&oautomatically'
+      - '&7&oremove the chunk upon &a&oplacement&7&o! ))'
+      - '&f'
+      - '&4&l* &cObtained from: &fstore.mystore.com'
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -68,10 +71,13 @@ HarvesterHoe:
   AutoSell: false #Will Automatically Sell All Sugar Cane Broken
   SugarCanePrice: 0.5 #The Cost Per Sugar Cane
   Item:
-    DisplayName: '&aHarvester Hoe'
+    DisplayName: '&a&lHarvester Hoe'
     Lore:
-      - '&7When Mined, Places Sugar Cane Directly,'
-      - '&7Into Your Inventory!'
+      - '&f'
+      - '&7&o(( Tip: When Mining &a&oSugar Cane&7&o will &f&oautomatically'
+      - '&7&oplace it &f&odirectly &7&ointo your &a&oinventory!'
+      - '&f'
+      - '&4&l* &cObtained from: &fstore.mystore.com'
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -102,6 +108,11 @@ Smelt-Wand:
     Lore:
       - '&f'
       - '&4&l* &cUses: &f{uses}'
+      - '&f'
+      - '&7&o(( Tip: When interacting with &b&oa chest&7&o will'
+      - '&f&osmelt &7&oall items in the &b&ochest!'
+      - '&f'
+      - '&4&l* &cObtained from: &fstore.mystore.com'
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -116,6 +127,11 @@ Craft-Wand:
     Lore:
       - '&f'
       - '&4&l* &cUses: &f{uses}'
+      - '&f'
+      - '&7&o(( Tip: When interacting with &b&oa chest&7&o will'
+      - '&f&ocraft &7&oall blocks in the &b&ochest!'
+      - '&f'
+      - '&4&l* &cObtained from: &fstore.mystore.com'
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -130,6 +146,11 @@ Lightning-Wand:
     Lore:
       - '&f'
       - '&4&l* &cUses: &f{uses}'
+      - '&f'
+      - '&7&o(( Tip: When interacting with &e&oa creeper&7&o will'
+      - '&f&oset &7&ocreeper to be a powered &e&ocreeper!'
+      - '&f'
+      - '&4&l* &cObtained from: &fstore.mystore.com'
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -148,6 +169,11 @@ Sand-Wand:
     Lore:
       - '&f'
       - '&4&l* &cUses: &f{uses}'
+      - '&f'
+      - '&7&o(( Tip: When interacting with &e&osand&7&o will'
+      - '&f&oset &7&oall sand stacked &e&oair!'
+      - '&f'
+      - '&4&l* &cObtained from: &fstore.mystore.com'
 
 ############################################################
 # +------------------------------------------------------+ #

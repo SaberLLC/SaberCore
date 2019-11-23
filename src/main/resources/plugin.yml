@@ -2,6 +2,13 @@ name: SaberCore
 version: ${project.version}
 main: me.driftay.score.SaberCore
 author: Driftay
+softdepend:
+  - Factions
+  - HolographicDisplays
+  - WorldGuard
+  - WorldEdit
+  - Vault
+  - Essentials
 commands:
   stackpots:
     description: Base command for stacking potions

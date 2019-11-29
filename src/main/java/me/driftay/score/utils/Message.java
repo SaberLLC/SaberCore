@@ -1,14 +1,23 @@
 package me.driftay.score.utils;
 
-import org.bukkit.ChatColor;
-
 public enum Message {
 
     NO_PERMISSION("no-permission", "&c&l[!] &7You do not have permission."),
     NOT_PLAYER("must-be-player", "&c&l[!] &7You must be a player to use this command!"),
     PLAYER_NOT_FOUND("player-not-found", "&c&l[!] &b%player% &7is not online!"),
+    INVALID_NUMBER("invalid-number", "&c&l[!] You need to specify a amount as an integer, this is the durability"),
 
     DISABLED_COMMAND_MESSAGE("disabled-commands-message", "&c&l[!] &4You are not permitted to use &c&l&n%command%"),
+
+    WAND_RECIEVED("Wand.received", "&2&l[!] &7You have received a &b{wand} &7wand!"),
+    WAND_NOT_USED("Wand.not-used", "&cWand not used, nothing happened"),
+    WAND_SMELTED_ITEMS("Wand.smelted-items", "&2&l[!] &7Smelted {amount} &7items in the chest!"),
+    WAND_WAND_BLOCK_NOT_USABLE("Wand.block-not-usable", "&c&l[!] &7You may not use this wand on this block!"),
+    WAND_CANNOT_USE_HERE("Wand.cannot-use-here", "&c&l[!] &7You may not use this wand here!"),
+    WAND_CRAFTED_ITEMS("Wand.crafted-items", "&2&l[!] &7Crafted &b{amount} &7amount of items in chest!"),
+    WAND_CHEST_EMPTY("Wand.chest-empty", "&c&l[!] &7That Chest is empty, therefore nothing happened"),
+    WAND_USAGE("Wand.useage", "&c&l[!] &7Try using &b/saberwand give <player> lightning/craft/smelt/sand <uses>"),
+    WAND_RECIEVED_NO_SPACE("Wand.received-no-space", "&c&l[!] &7You have no space in your inventory, item dropped on floor"),
 
     PING_YOURSELF("ping-yourself", "&c&l[!] &7Your ping is &b%ping%ms&7."),
     PING_OTHER("ping-other", "&c&l[!] &b%player%'s &7ping is &b%ping%&7."),
@@ -16,6 +25,7 @@ public enum Message {
     SLOW_CHAT_BROADCAST("slowchat.broadcast", "&cPublic chat has been slowed"),
     MUTE_CHAT_TOGGLED("mute-chat.toggled", "&ePublic Chat has been &d{context} &eby {player}"),
     ANTI_SPAWNER_MINE_PLAYERS_NEAR("anti-spawner-mine-players-near", "&c&l[!] &7You may not break spawners while enemies are near!"),
+    POTS_STACKED("pots.stacked", "&2&l[!] &7All of the potions in your inventory have been stacked!"),
 
     GIVE_ALL_INVALID_ITEM("give-all.item-invalid", "&c&l[!] &7You can't give air to everyone xD"),
     GIVE_ALL_RECEIVED("give-all.received", "&2&l[!] &7Everyone on the server has been gifted &b{item}&7!"),
@@ -98,7 +108,7 @@ public enum Message {
 
     Message(String config, String message) {
         this.config = config;
-        this.message = ChatColor.translateAlternateColorCodes('&', message);
+        this.message = Util.color(message);
     }
 
     public String getConfig() {

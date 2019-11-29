@@ -2,7 +2,21 @@ name: SaberCore
 version: ${project.version}
 main: me.driftay.score.SaberCore
 author: Driftay
+softdepend:
+  - Factions
+  - HolographicDisplays
+  - WorldGuard
+  - WorldEdit
+  - Vault
+  - Essentials
 commands:
+  stackpots:
+    description: Base command for stacking potions
+  saberwand:
+    aliases:
+      - wand
+      - wands
+    description: Base command for giving wands
   slowchat:
     description: base command for slowchat
   giveall:
@@ -54,6 +68,8 @@ permissions:
     description: Allows access to give chunkbusters to players
   sabercore.harvesterhoe.give:
     description: Allows access to give harvester hoes to players
+  sabercore.potstack:
+    description: Allows access to /stackpots
   sabercore.anvil:
     description: Allows access to /anvil
   sabercore.jellylegs:

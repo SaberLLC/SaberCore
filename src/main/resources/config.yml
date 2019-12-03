@@ -39,7 +39,7 @@ denyNaturalMobSpawning: true #Denies all natural mobs from spawning
 denyBlazeWaterDamage: true #Blazes will not take damage from water
 useBookDisenchant: true #Left clicking a enchantment table with a enchanted book will convert it back to its original form (HCF Style)
 useOreTracker: false #Adds a HCF Style ore tracker to pickaxes.
-
+useAntiRoofCannon: false # Removes all sand and tnt at y level 255 to prevent roof cannons.
 ############################################################
 # +------------------------------------------------------+ #
 # |                    Chunkbusters                      | #

@@ -19,6 +19,7 @@ import me.driftay.score.hooks.PluginHook;
 import me.driftay.score.hooks.impl.FactionHook;
 import me.driftay.score.hooks.impl.WorldGuardHook;
 import me.driftay.score.listeners.InstaBreakSponge;
+import me.driftay.score.tasks.RoofCannonTask;
 import me.driftay.score.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -37,6 +38,7 @@ public final class SaberCore extends JavaPlugin {
     private Persist persist;
     public List<String> itemList = getConfig().getStringList("DeniedItemStorage.Items");
     private ChatHandler chatHandler;
+    private RoofCannonTask roofCannonTask;
 
 
     public static void log(String message) {
@@ -78,6 +80,19 @@ public final class SaberCore extends JavaPlugin {
 
     public void onDisable() {
         instance = null;
+        cleanBeforeStop();
+    }
+
+    // - Makes sure all tasks are stopped before the plugin stops
+
+    private void cleanBeforeStop() {
+        if (roofCannonTask != null) {
+            try {
+                roofCannonTask.cancel();
+            } catch (final IllegalStateException ex) {
+            }
+            roofCannonTask = null;
+        }
     }
 
     private void registerListeners() {
@@ -192,6 +207,13 @@ public final class SaberCore extends JavaPlugin {
         }
         if(getConfig().getBoolean("useAntiZombieBaby")){
             getServer().getPluginManager().registerEvents(new AntiBabyZombie(), this);
+        }
+
+        if(getConfig().getBoolean("useAntiRoofCannon")) {
+            getServer().getPluginManager().registerEvents(new RoofCannonTask(), this);
+
+            roofCannonTask = new RoofCannonTask();
+            roofCannonTask.runTaskTimer(this,20L,20L);
         }
     }
     public ChatHandler getChatHandler() { return chatHandler; }
